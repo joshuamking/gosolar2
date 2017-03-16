@@ -17,11 +17,18 @@
 package com.gosolar2;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.convert.converter.Converter;
 
 @SpringBootApplication
+@EnableAutoConfiguration (exclude = {
+		JpaRepositoriesAutoConfiguration.class
+})
+@ComponentScan ("com.gosolar2")
 public class SampleWebUiApplication {
 
 	public static void main (String[] args) throws Exception {
@@ -29,17 +36,18 @@ public class SampleWebUiApplication {
 	}
 
 	@Bean
-	public Converter<String, Message> messageConverter () {
-		return new Converter<String, Message>() {
-			@Override public Message convert (String id) {
-				return SampleWebUiApplication.this.messageRepository().findMessage(Long.valueOf(id));
+	public Converter<String, Course> courseConverter () {
+		return new Converter<String, Course>() {
+			@Override public Course convert (String id) {
+				return SampleWebUiApplication.this.courseRepository().findMessage(Long.valueOf(id));
 			}
 		};
 	}
 
+
 	@Bean
-	public MessageRepository messageRepository () {
-		return new InMemoryMessageRepository();
+	public CourseRepository courseRepository () {
+		return new InMemoryCourseRepository();
 	}
 
 }

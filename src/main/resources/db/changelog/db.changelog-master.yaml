@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: josh
+      changes:
+        - createTable:
+            tableName: course
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+  - changeSet:
+      id: 4
+      author: josh
+      changes:
+        - alterTable:
+            tableName: course
+            columns:
+              - column:
+                  name: test
+                  type: int

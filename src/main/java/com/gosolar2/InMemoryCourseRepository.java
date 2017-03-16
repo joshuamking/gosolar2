@@ -16,6 +16,9 @@
 
 package com.gosolar2;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
@@ -23,30 +26,32 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * @author Dave Syer
  */
-public class InMemoryMessageRepository implements MessageRepository {
+@Service
+@Component
+public class InMemoryCourseRepository implements CourseRepository {
 
 	private static AtomicLong counter = new AtomicLong();
 
-	private final ConcurrentMap<Long, Message> messages = new ConcurrentHashMap<>();
+	private final ConcurrentMap<Long, Course> messages = new ConcurrentHashMap<>();
 
 	@Override
-	public Iterable<Message> findAll () {
+	public Iterable<Course> findAll () {
 		return this.messages.values();
 	}
 
 	@Override
-	public Message save (Message message) {
-		Long id = message.getId();
+	public Course save (Course course) {
+		Long id = course.getId();
 		if (id == null) {
 			id = counter.incrementAndGet();
-			message.setId(id);
+			course.setId(id);
 		}
-		this.messages.put(id, message);
-		return message;
+		this.messages.put(id, course);
+		return course;
 	}
 
 	@Override
-	public Message findMessage (Long id) {
+	public Course findMessage (Long id) {
 		return this.messages.get(id);
 	}
 

@@ -13,17 +13,45 @@
 
 package com.gosolar2;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+
 /**
  * @author Rob Winch
  */
-public interface MessageRepository {
+@Entity
+@Table (name = "course")
+public class Course {
+	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
+	private Long id;
 
-	Iterable<Message> findAll ();
+	@NotEmpty (message = "Course is required.")
+	@Column
+	private String name;
 
-	Message save (Message message);
+	public Course (String name) {
+		this.name = name;
+	}
 
-	Message findMessage (Long id);
+	public Course () {
 
-	void deleteMessage (Long id);
+	}
 
+	public Long getId () {
+		return this.id;
+	}
+
+	public void setId (Long id) {
+		this.id = id;
+	}
+
+	public String getName () {
+		return name;
+	}
+
+	public void setName (String name) {
+		this.name = name;
+	}
 }
