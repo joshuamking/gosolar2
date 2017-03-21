@@ -1,0 +1,144 @@
+@import 'variables';
+
+html,body{
+	height: 100%;
+	width: 100%;
+	// overflow: hidden;
+}
+
+body{
+	margin: 0;
+}
+
+#mainContainer{
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+	border: solid 5px black;
+}
+
+#mainWrapper{
+	height: 80%;
+	width: 80%;
+	padding: 10vh 10vw;
+	opacity: 0;
+}
+
+.welcomeTitle{
+	font-size: calc(12px + 1.5vw);
+	position: relative;
+	float: left;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 30vh;
+}
+
+.loginButton{
+	position: relative;
+	float: left;
+	clear: both;
+	padding: 15px 25px;
+	border-radius: 2px;
+	background-color: black;
+	color: white;
+	width: auto;
+	height: auto;
+	left: 50%;
+	transform: translateX(-50%);
+	margin-top: 5vh;
+
+	//{ ** INCLUDES
+		@include card();
+	//} ** END INCLUDES
+
+	cursor: pointer;
+
+	&:hover{
+		@keyframes loginHover{
+			0%{
+				background-color: black;
+			}
+			10%{
+				background-color: grey;
+			}
+			80%{
+				background-color: grey;
+			}
+			100%{
+				background-color: black;
+			}
+		}
+		animation: loginHover 3s ease-out 0s;
+	}
+	
+}
+
+.centerContainer{
+	position: relative;
+	float: left;
+	height: auto;
+	width: auto;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+
+	.header{
+		position: relative;
+		float: left;
+		clear: left;
+		text-align: center;
+		width: 100%;
+		font-size: calc(8px + 0.5vw);
+	}
+
+	form{
+
+
+		//{ ** ATTRIBUTES
+			margin-top: 5vh;
+			position: relative;
+			float: left;
+			clear: left;
+			left: 50%;
+			transform: translateX(-50%);
+		//} ** END ATTRIBUTES
+		
+		input{
+			position: relative;
+			float: left;
+			clear: left;
+		}
+
+		input[type=text], input[type=password]{
+			padding: 10px 20px;
+			margin-bottom: 10px;
+			border-radius: 2px;
+			border: solid 2px black;
+
+
+			//{ ** INCLUDES
+				@include noDecoration();
+				@include inputWhite();
+			//} ** END INCLUDES
+			
+		}
+
+		input[type=submit]{
+			display: none;
+		}
+
+		label{
+			.submit{
+				position: relative;
+				float: left;
+				clear: left;
+				padding: 20px;
+				cursor: pointer;
+				left: 50%;
+				transform: translateX(-50%);
+				
+			}
+		}
+
+
+	}
+}

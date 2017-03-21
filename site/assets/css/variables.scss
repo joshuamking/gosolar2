@@ -1,0 +1,158 @@
+/////////////////////////////////////////// SET FONT ///////////////////////////////////////////
+
+@import url('https://fonts.googleapis.com/css?family=Slabo+13px');
+$font-global: 'Slabo 13px', serif;
+*{font-family: $font-global;}
+/////////////////////////////////////////// END SET FONT ///////////////////////////////////////////
+
+/////////////////////////////////////////// COLORS ///////////////////////////////////////////
+
+$color-black: rgba(22,22,22,1);
+$color-black-50: rgba(22,22,22,0.5);
+$color-blue: #0039A6;
+$color-blue-dark: #0a2070;
+$color-link: #82ddf0;
+$color-red: #700a0a;
+/////////////////////////////////////////// END COLORS ///////////////////////////////////////////
+
+/////////////////////////////////////////// MIXINS ///////////////////////////////////////////
+
+@mixin quickTransition($attribute){
+    -moz-transition: $attribute .2s ease;
+    -o-transition: $attribute .2s ease;
+    -webkit-transition: $attribute .2s ease;
+    -ms-transition: $attribute .2s ease;
+    transition: $attribute .2s ease;
+}
+
+@mixin quickInTransition($attribute){
+    -moz-transition: $attribute .2s ease-out;
+    -o-transition: $attribute .2s ease-out;
+    -webkit-transition: $attribute .2s ease-out;
+    -ms-transition: $attribute .2s ease-out;
+    transition: $attribute .2s ease-out;
+}
+
+@mixin quickOutTransition($attribute){
+    -moz-transition: $attribute .2s ease-in;
+    -o-transition: $attribute .2s ease-in;
+    -webkit-transition: $attribute .2s ease-in;
+    -ms-transition: $attribute .2s ease-in;
+    transition: $attribute .2s ease-in;
+}
+
+@mixin transition($attribute, $time, $delay){
+    -moz-transition: $attribute $time ease-out;
+    -o-transition: $attribute $time ease-out;
+    -webkit-transition: $attribute $time ease-out;
+    -ms-transition: $attribute $time ease-out;
+    transition: $attribute $time ease-out; 
+    -webkit-transition-delay: $delay;
+    transition-delay: $delay;
+}
+
+@mixin noTransition(){
+    -moz-transition: initial;
+    -o-transition: initial;
+    -webkit-transition: initial;
+    -ms-transition: initial;
+    transition: initial;
+}
+
+@mixin rotate($value){
+    transform: rotate($value + deg);
+    -ms-transform: rotate($value + deg);
+    -webkit-transform: rotate($value + deg);
+    -moz-transform: rotate($value + deg);
+    -o-transform: rotate($value + deg);
+}
+
+@mixin freezeHeight(){
+	-moz-transition: height 999999999999s ease-in !important;
+    -o-transition: height 999999999999s ease-in !important;
+    -webkit-transition: height 999999999999s ease-in !important;
+    transition: height 999999999999s ease-in !important;
+    -ms-transition: height 999999999999s ease-in !important;
+    -moz-transition: margin 999999999999s ease-in !important;
+    -o-transition: margin 999999999999s ease-in !important;
+    -webkit-transition: margin 999999999999s ease-in !important;
+    transition: margin 999999999999s ease-in !important;
+    -ms-transition: margin 999999999999s ease-in !important;
+}
+
+@mixin noDecoration(){
+    &:visted{
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+@mixin noList(){
+    list-style: none;
+    list-style-image: none;
+    list-style-type: none;
+}
+
+@mixin notSelectable(){
+    -webkit-user-select: none; /* Chrome/Safari */        
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: none;
+	user-select: none;
+    cursor: default;
+}
+
+@mixin selectable(){
+    -webkit-user-select: initial; /* Chrome/Safari */        
+	-moz-user-select: initial; /* Firefox */
+	-ms-user-select: initial; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	-o-user-select: initial;
+	user-select: initial;
+    cursor: initial;
+}
+
+@mixin fullHeight{
+	min-height: 100vh;
+	&.isMobile{
+		min-height: calc(100vh + 60px);
+		@include freezeHeight();
+	}
+}
+
+@mixin relativeMiddle(){
+    position: relative;
+    float: left;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin card(){
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -moz-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -o-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    -ms-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    @include quickTransition(box-shadow);
+    &:not(.isMobile):hover{
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -webkit-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -moz-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -o-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        -ms-box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+}
+
+@mixin inputWhite(){
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+/////////////////////////////////////////// END MIXINS ///////////////////////////////////////////

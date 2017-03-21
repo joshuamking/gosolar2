@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css?family=Slabo+13px");
+* {
+  font-family: "Slabo 13px", serif; }
+
+html, body {
+  height: 100%;
+  width: 100%; }
+
+body {
+  margin: 0; }
+
+#mainContainer {
+  width: calc(100% - 10px);
+  height: calc(100% - 10px);
+  border: solid 5px black; }
+
+#mainWrapper {
+  height: 80%;
+  width: 80%;
+  padding: 10vh 10vw;
+  opacity: 0; }
+
+.welcomeTitle {
+  font-size: calc(12px + 1.5vw);
+  position: relative;
+  float: left;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 30vh; }
+
+.loginButton {
+  position: relative;
+  float: left;
+  clear: both;
+  padding: 15px 25px;
+  border-radius: 2px;
+  background-color: black;
+  color: white;
+  width: auto;
+  height: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5vh;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -moz-transition: box-shadow 0.2s ease;
+  -o-transition: box-shadow 0.2s ease;
+  -webkit-transition: box-shadow 0.2s ease;
+  -ms-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  cursor: pointer; }
+  .loginButton:not(.isMobile):hover {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    -o-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    -ms-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
+  .loginButton:hover {
+    animation: loginHover 3s ease-out 0s; }
+@keyframes loginHover {
+  0% {
+    background-color: black; }
+  10% {
+    background-color: grey; }
+  80% {
+    background-color: grey; }
+  100% {
+    background-color: black; } }
+.centerContainer {
+  position: relative;
+  float: left;
+  height: auto;
+  width: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+  .centerContainer .header {
+    position: relative;
+    float: left;
+    clear: left;
+    text-align: center;
+    width: 100%;
+    font-size: calc(8px + 0.5vw); }
+  .centerContainer form {
+    margin-top: 5vh;
+    position: relative;
+    float: left;
+    clear: left;
+    left: 50%;
+    transform: translateX(-50%); }
+    .centerContainer form input {
+      position: relative;
+      float: left;
+      clear: left; }
+    .centerContainer form input[type=text], .centerContainer form input[type=password] {
+      padding: 10px 20px;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      border: solid 2px black;
+      outline: none;
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-box-shadow: 0 0 0px 1000px white inset; }
+      .centerContainer form input[type=text]:visted, .centerContainer form input[type=password]:visted {
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+        -webkit-tap-highlight-color: transparent; }
+    .centerContainer form input[type=submit] {
+      display: none; }
+    .centerContainer form label .submit {
+      position: relative;
+      float: left;
+      clear: left;
+      padding: 20px;
+      cursor: pointer;
+      left: 50%;
+      transform: translateX(-50%); }
+
+/*# sourceMappingURL=home.css.map */
