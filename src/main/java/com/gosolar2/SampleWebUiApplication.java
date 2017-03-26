@@ -23,16 +23,32 @@ import org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfig
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 @SpringBootApplication
 @EnableAutoConfiguration (exclude = {
 		JpaRepositoriesAutoConfiguration.class
 })
+@Controller
 @ComponentScan ("com.gosolar2")
 public class SampleWebUiApplication {
 
 	public static void main (String[] args) throws Exception {
 		SpringApplication.run(SampleWebUiApplication.class, args);
+
+		try {
+			Runtime.getRuntime().exec("open http://localhost:8000/index.html");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Bean
@@ -44,10 +60,17 @@ public class SampleWebUiApplication {
 		};
 	}
 
-
 	@Bean
 	public CourseRepository courseRepository () {
 		return new InMemoryCourseRepository();
 	}
 
+	@GetMapping ("/**")
+	@ResponseBody
+	public String home (HttpServletRequest request) throws IOException {
+		String path = request.getServletPath();
+		if (!path.contains(".")) { path += "/index.html"; }
+		File file = new File("src/main/resources/site/" + path);
+		return Files.readAllLines(file.toPath()).stream().map(s -> s + "\n").reduce(String::concat).get();
+	}
 }

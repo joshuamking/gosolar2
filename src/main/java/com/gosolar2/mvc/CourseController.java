@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Doo-Hwan Kwak
  */
 @Controller
-@RequestMapping ("/")
+@RequestMapping ("/course")
 public class CourseController {
 
 	private final CourseRepository courseRepository;
@@ -38,7 +38,7 @@ public class CourseController {
 		this.courseRepository = courseRepository;
 	}
 
-	@GetMapping ("{name}")
+	@GetMapping ("/{name}")
 	@ResponseBody
 	public String list (@PathVariable ("name") String name) {
 //		Iterable<Course> messages = this.courseRepository.findAll();
