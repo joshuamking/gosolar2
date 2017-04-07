@@ -16,11 +16,13 @@ package com.gosolar2;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 /**
  * @author Rob Winch
  */
 @Entity
+@Transactional
 @Table (name = "course")
 public class Course {
 	@Id
@@ -28,6 +30,7 @@ public class Course {
 	private Long id;
 
 	@NotEmpty (message = "Course is required.")
+	@Basic
 	@Column
 	private String name;
 

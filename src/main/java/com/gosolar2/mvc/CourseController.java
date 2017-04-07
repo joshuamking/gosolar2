@@ -18,6 +18,8 @@ package com.gosolar2.mvc;
 
 import com.gosolar2.Course;
 import com.gosolar2.CourseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,8 +33,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping ("/course")
 public class CourseController {
-
-	private final CourseRepository courseRepository;
+	@Qualifier ("courseRepository") @Autowired private CourseRepository courseRepository;
 
 	public CourseController (CourseRepository courseRepository) {
 		this.courseRepository = courseRepository;
@@ -40,12 +41,16 @@ public class CourseController {
 
 	@GetMapping ("/{name}")
 	@ResponseBody
-	public String list (@PathVariable ("name") String name) {
-//		Iterable<Course> messages = this.courseRepository.findAll();
-//		return new ModelAndView("messages/list", "messages", messages);
+	public String save (@PathVariable ("name") String name) {
 		Course course = new Course(name);
 		courseRepository.save(course);
 
 		return "fuck you " + name;
+	}
+
+	@GetMapping ("/")
+	@ResponseBody
+	public Iterable<Course> list () {
+		return this.courseRepository.findAll();
 	}
 }

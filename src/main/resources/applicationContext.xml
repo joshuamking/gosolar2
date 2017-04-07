@@ -11,7 +11,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <property name="url" value="jdbc:mysql://localhost:3306/gosolar2"/>
         <property name="username" value="root"/>
-        <property name="password" value=""/>
+        <property name="password" value="root"/>
         <!--<property name="connectionCachingEnabled" value="true"/>-->
     </bean>
 
@@ -21,7 +21,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
             </props>
         </property>
@@ -31,13 +31,6 @@
         <property name="showSql" value="true"/>
         <property name="generateDdl" value="true"/>
         <property name="database" value="MYSQL"/>
-    </bean>
-
-    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="dataSource" ref="dataSource"/>
-        <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
-        <!-- spring based scanning for entity classes>-->
-        <property name="packagesToScan" value="com.gosolar2"/>
     </bean>
 
     <!-- Enables the Hibernate @Transactional programming model -->
@@ -50,5 +43,5 @@
 
     <jpa:repositories base-package="com.gosolar2"/>
     <context:component-scan base-package="com.gosolar2"/>
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
 </beans>
