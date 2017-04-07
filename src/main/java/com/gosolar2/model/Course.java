@@ -17,9 +17,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
+import java.time.LocalTime;
 
 /**
- * @author Rob Winch
+ * @author josh
  */
 @Entity
 @Transactional
@@ -27,34 +28,34 @@ import javax.transaction.Transactional;
 public class Course {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private Long id;
-
+	private Long      id;
 	@NotEmpty (message = "Course is required.")
-	@Basic
 	@Column
-	private String name;
-
-	public Course (String name) {
-		this.name = name;
-	}
-
-	public Course () {
-
-	}
-
-	public Long getId () {
-		return this.id;
-	}
-
-	public void setId (Long id) {
-		this.id = id;
-	}
-
-	public String getName () {
-		return name;
-	}
-
-	public void setName (String name) {
-		this.name = name;
-	}
+	private String    name;
+	@Column
+	private int       credits;
+	@Column
+	private String    classNumber;
+	@Column
+	private String    description;
+	@Column
+	private String    degreeLevel;
+	@Column
+	private String    subjectCode;
+	@Column
+	private String    building;
+	@Column
+	private int       roomNumber;
+	@Column
+	private String    term;
+	@Column
+	private LocalTime startTime;
+	@Column
+	private LocalTime endTime;
+	@Column
+	private String    days;
+	@Column
+	private int       crn;
+	@Column
+	private int       maxCapacity;
 }

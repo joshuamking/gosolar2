@@ -41,11 +41,11 @@ public class CourseController {
 
 	@GetMapping ("/{name}")
 	@ResponseBody
-	public String save (@PathVariable ("name") String name) {
-		Course course = new Course(name);
+	public Course save (@PathVariable ("name") String name) {
+		Course course = new Course();
 		courseRepository.save(course);
 
-		return "fuck you " + name;
+		return course;
 	}
 
 	@GetMapping ("/")

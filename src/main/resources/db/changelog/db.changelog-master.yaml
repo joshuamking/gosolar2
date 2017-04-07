@@ -16,3 +16,69 @@ databaseChangeLog:
               - column:
                   name: name
                   type: varchar(50)
+  - changeSet:
+      id: "add new course columns"
+      author: josh
+      changes:
+        - addNotNullConstraint:
+            tableName: course
+            columnName: name
+            columnDataType: varchar(50)
+        - addColumn:
+            tableName: course
+            columns:
+              - column:
+                  name: credits
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: classNumber
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: degreeLevel
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: subjectCode
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: building
+                  type: varchar(50)
+              - column:
+                  name: roomNumber
+                  type: int
+              - column:
+                  name: term
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: startTime
+                  type: varchar(50)
+              - column:
+                  name: endTime
+                  type: varchar(50)
+              - column:
+                  name: days
+                  type: varchar(50)
+              - column:
+                  name: crn
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: maxCapacity
+                  type: int
+                  constraints:
+                    nullable: false
