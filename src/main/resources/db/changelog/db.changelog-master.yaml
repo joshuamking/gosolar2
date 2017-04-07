@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 1
+      id: "Create course"
       author: josh
       changes:
         - createTable:
