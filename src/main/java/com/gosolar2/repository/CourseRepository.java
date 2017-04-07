@@ -1,5 +1,6 @@
-package com.gosolar2;
+package com.gosolar2.repository;
 
+import com.gosolar2.model.Course;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

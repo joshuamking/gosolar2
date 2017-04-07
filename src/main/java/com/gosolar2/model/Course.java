@@ -11,7 +11,7 @@
  * specific language governing permissions and limitations under the License.
  */
 
-package com.gosolar2;
+package com.gosolar2.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.gosolar2.mvc;
+package com.gosolar2.controller;
 
-import com.gosolar2.Course;
-import com.gosolar2.CourseRepository;
+import com.gosolar2.model.Course;
+import com.gosolar2.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
