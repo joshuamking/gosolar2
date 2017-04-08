@@ -30,9 +30,9 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping ("/course")
 public class CourseController {
-	@Qualifier ("courseRepository") @Autowired private CourseRepository courseRepository;
+	private final CourseRepository courseRepository;
 
-	public CourseController (CourseRepository courseRepository) {
+	@Autowired public CourseController (@Qualifier ("courseRepository") CourseRepository courseRepository) {
 		this.courseRepository = courseRepository;
 	}
 

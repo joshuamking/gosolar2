@@ -15,7 +15,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: name
-                  type: varchar(50)
+                  type: varchar(255)
   - changeSet:
       id: "add new course columns"
       author: josh
@@ -23,7 +23,7 @@ databaseChangeLog:
         - addNotNullConstraint:
             tableName: course
             columnName: name
-            columnDataType: varchar(50)
+            columnDataType: varchar(255)
         - addColumn:
             tableName: course
             columns:
@@ -34,44 +34,44 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: classNumber
-                  type: varchar(50)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: description
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
+                  name: description
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
                   name: degreeLevel
-                  type: varchar(50)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: subjectCode
-                  type: varchar(50)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: building
-                  type: varchar(50)
+                  type: varchar(255)
               - column:
                   name: roomNumber
-                  type: varchar(50)
+                  type: varchar(255)
               - column:
                   name: term
-                  type: varchar(50)
+                  type: varchar(255)
                   constraints:
                     nullable: false
               - column:
                   name: startTime
-                  type: varchar(50)
+                  type: varchar(255)
               - column:
                   name: endTime
-                  type: varchar(50)
+                  type: varchar(255)
               - column:
                   name: days
-                  type: varchar(50)
+                  type: varchar(255)
               - column:
                   name: crn
                   type: int
@@ -82,3 +82,53 @@ databaseChangeLog:
                   type: int
                   constraints:
                     nullable: false
+  - changeSet:
+      id: "Create user and student tables"
+      author: josh
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: firstName
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lastName
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: phoneNumber
+                  type: varchar(255)
+        - createTable:
+            tableName: student
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: major
+                  type: varchar(255)

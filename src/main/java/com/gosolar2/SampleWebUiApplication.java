@@ -61,7 +61,7 @@ public class SampleWebUiApplication {
 		SpringApplication.run(SampleWebUiApplication.class, args);
 
 		try {
-			Runtime.getRuntime().exec("open http://localhost:8000/course/");
+			Runtime.getRuntime().exec("open http://localhost:8000/student/");
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -73,6 +73,8 @@ public class SampleWebUiApplication {
 	public String home (HttpServletRequest request) throws IOException {
 		String path = request.getServletPath();
 		if (!path.contains(".")) { path += "/index.html"; }
+		// TODO: 4/8/17 Remove once we have a favicon.ico @solo
+		if (path.contains("favicon.ico")) { return null; }
 		File file = new File("src/main/resources/site/" + path);
 		return Files.readAllLines(file.toPath()).stream().map(s -> s + "\n").reduce(String::concat).get();
 	}
