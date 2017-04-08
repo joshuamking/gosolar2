@@ -14,7 +14,7 @@ public class Transcript {
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long    id;
 	private boolean isOfficial;
-	private boolean isgraduate;
+	private boolean isGraduate;
 
 	public Long getId () {
 		return id;
@@ -24,15 +24,15 @@ public class Transcript {
 		return isOfficial;
 	}
 
-	public void setOfficial (boolean official) {
-		isOfficial = official;
+	public void setOfficial (boolean isOfficial) {
+		this.isOfficial = isOfficial;
 	}
 
-	public boolean isIsgraduate () {
-		return isgraduate;
+	public boolean getIsGraduate () {
+		return isGraduate;
 	}
 
-	public void setIsgraduate (boolean isgraduate) {
-		this.isgraduate = isgraduate;
+	public void setIsGraduate (boolean isGraduate) {
+		this.isGraduate = isGraduate;
 	}
 }

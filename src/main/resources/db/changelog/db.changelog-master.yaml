@@ -65,10 +65,10 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: startTime
-                  type: varchar(255)
+                  type: int
               - column:
                   name: endTime
-                  type: varchar(255)
+                  type: int
               - column:
                   name: days
                   type: varchar(255)
@@ -131,4 +131,39 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: major
+                  type: varchar(255)
+  - changeSet:
+      id: "add new student column 'isTA'"
+      author: josh
+      changes:
+        - addColumn:
+            tableName: student
+            columns:
+              - column:
+                  name: isTA
+                  type: boolean
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: "create new table professor"
+      author: josh
+      changes:
+        - createTable:
+            tableName: professor
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: officeHoursStartTime
+                  type: int
+              - column:
+                  name: officeHoursEndTime
+                  type: int
+              - column:
+                  name: officeLocation
                   type: varchar(255)

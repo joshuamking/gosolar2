@@ -13,12 +13,14 @@
 
 package com.gosolar2.model;
 
+import com.gosolar2.converters.LocalTimeToIntConverter;
+
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.time.LocalTime;
 
 /**
- * @author josh
+ * Created by Joshua King on 4/7/17.
  */
 @Entity
 @Transactional
@@ -26,21 +28,21 @@ import java.time.LocalTime;
 public class Course {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private Long      id;
-	private String    name;
-	private int       credits;
-	private String    classNumber;
-	private String    description;
-	private String    degreeLevel;
-	private String    subjectCode;
-	private String    building;
-	private String    roomNumber;
-	private String    term;
-	private LocalTime startTime;
-	private LocalTime endTime;
-	private String    days;
-	private int       crn;
-	private int       maxCapacity;
+	private                                                      Long      id;
+	private                                                      String    name;
+	private                                                      int       credits;
+	private                                                      String    classNumber;
+	private                                                      String    description;
+	private                                                      String    degreeLevel;
+	private                                                      String    subjectCode;
+	private                                                      String    building;
+	private                                                      String    roomNumber;
+	private                                                      String    term;
+	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime startTime;
+	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime endTime;
+	private                                                      String    days;
+	private                                                      int       crn;
+	private                                                      int       maxCapacity;
 
 	public Course (String name, int credits, String subjectCode, String classNumber, String description, String degreeLevel, String term, int crn, int maxCapacity) {
 		this.name = name;

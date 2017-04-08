@@ -9,7 +9,16 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "student")
 public class Student extends User {
-	private String major;
+	private String  major;
+	private boolean isTA;
+
+	public boolean getIsTA () {
+		return isTA;
+	}
+
+	public void setIsTA (boolean TA) {
+		isTA = TA;
+	}
 
 	public String getMajor () {
 		return major;
