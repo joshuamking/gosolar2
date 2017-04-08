@@ -21,10 +21,7 @@ import com.gosolar2.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Rob Winch
@@ -39,13 +36,10 @@ public class CourseController {
 		this.courseRepository = courseRepository;
 	}
 
-	@GetMapping ("/{name}")
+	@PostMapping ({"/new", "/create"})
 	@ResponseBody
-	public Course save (@PathVariable ("name") String name) {
-		Course course = new Course(name, 3, "Math", "3030", "The desc.", "Undergraduate", "Spring 2017", 72646, 125);
-		courseRepository.save(course);
-
-		return course;
+	public Course save (@RequestBody Course newCourse) {
+		return courseRepository.save(newCourse);
 	}
 
 	@GetMapping ("/")
