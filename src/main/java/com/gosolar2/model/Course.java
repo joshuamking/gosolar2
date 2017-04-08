@@ -13,8 +13,6 @@
 
 package com.gosolar2.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.time.LocalTime;
@@ -29,34 +27,19 @@ public class Course {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long      id;
-	@NotEmpty (message = "Course name is required")
-	@Column
 	private String    name;
-	@Column
 	private int       credits;
-	@Column
 	private String    classNumber;
-	@Column
 	private String    description;
-	@Column
 	private String    degreeLevel;
-	@Column
 	private String    subjectCode;
-	@Column
 	private String    building;
-	@Column
 	private String    roomNumber;
-	@Column
 	private String    term;
-	@Column
 	private LocalTime startTime;
-	@Column
 	private LocalTime endTime;
-	@Column
 	private String    days;
-	@Column
 	private int       crn;
-	@Column
 	private int       maxCapacity;
 
 	public Course (String name, int credits, String subjectCode, String classNumber, String description, String degreeLevel, String term, int crn, int maxCapacity) {

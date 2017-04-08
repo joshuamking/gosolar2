@@ -10,11 +10,11 @@ import javax.persistence.*;
 @Inheritance (strategy = InheritanceType.JOINED)
 public class User {
 	@Id @GeneratedValue (strategy = GenerationType.AUTO) private Long   id;
-	@Column private                                              String firstName;
-	@Column private                                              String lastName;
-	@Column private                                              String email;
-	@Column private                                              String password;
-	@Column private                                              String phoneNumber;
+	private                                                      String firstName;
+	private                                                      String lastName;
+	private                                                      String email;
+	private                                                      String password;
+	private                                                      String phoneNumber;
 //	@ManyToMany (targetEntity = Course.class/*, mappedBy = "id"*/) private Set<Course> classes;
 
 

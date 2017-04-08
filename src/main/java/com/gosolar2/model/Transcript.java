@@ -1,7 +1,5 @@
 package com.gosolar2.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.transaction.Transactional;
 
@@ -10,36 +8,31 @@ import javax.transaction.Transactional;
  */
 @Entity
 @Transactional
-@Table(name = "course")
-
+@Table (name = "course")
 public class Transcript {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
+	private Long    id;
+	private boolean isOfficial;
+	private boolean isgraduate;
 
-    @NotEmpty(message = "Course is required.")
-    @Column
-    private boolean isOfficial;
-    @Column
-    private boolean isgraduate;
+	public Long getId () {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public boolean isOfficial () {
+		return isOfficial;
+	}
 
-    public boolean isOfficial() {
-        return isOfficial;
-    }
+	public void setOfficial (boolean official) {
+		isOfficial = official;
+	}
 
-    public void setOfficial(boolean official) {
-        isOfficial = official;
-    }
+	public boolean isIsgraduate () {
+		return isgraduate;
+	}
 
-    public boolean isIsgraduate() {
-        return isgraduate;
-    }
-
-    public void setIsgraduate(boolean isgraduate) {
-        this.isgraduate = isgraduate;
-    }
+	public void setIsgraduate (boolean isgraduate) {
+		this.isgraduate = isgraduate;
+	}
 }

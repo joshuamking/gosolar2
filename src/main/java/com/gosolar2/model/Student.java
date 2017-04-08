@@ -1,6 +1,5 @@
 package com.gosolar2.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -10,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table (name = "student")
 public class Student extends User {
-	@Column private String major;
+	private String major;
 
 	public String getMajor () {
 		return major;

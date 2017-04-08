@@ -1,7 +1,5 @@
 package com.gosolar2.model;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import javax.persistence.*;
 import javax.transaction.Transactional;
 
@@ -11,56 +9,49 @@ import javax.transaction.Transactional;
 
 @Entity
 @Transactional
-@Table(name = "course")
-
+@Table (name = "course")
 public class EmergencyContact {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+	@Id
+	@GeneratedValue (strategy = GenerationType.AUTO)
+	private Long   id;
+	private String name;
+	private String address;
+	private String phoneNumber;
+	private String relationship;
 
-    @NotEmpty(message = "Course is required.")
-    @Column
-    private String name;
-    @Column
-    private String address;
-    @Column
-    private String phoneNumber;
-    @Column
-    private String relationship;
+	public Long getId () {
+		return id;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public String getName () {
+		return name;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setName (String name) {
+		this.name = name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getAddress () {
+		return address;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public void setAddress (String address) {
+		this.address = address;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public String getPhoneNumber () {
+		return phoneNumber;
+	}
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+	public void setPhoneNumber (String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+	public String getRelationship () {
+		return relationship;
+	}
 
-    public String getRelationship() {
-        return relationship;
-    }
-
-    public void setRelationship(String relationship) {
-        this.relationship = relationship;
-    }
+	public void setRelationship (String relationship) {
+		this.relationship = relationship;
+	}
 }
