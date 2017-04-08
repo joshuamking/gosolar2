@@ -29,7 +29,7 @@ public class Course {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
 	private Long      id;
-	@NotEmpty (message = "Course is required.")
+	@NotEmpty (message = "Course name is required")
 	@Column
 	private String    name;
 	@Column
@@ -45,7 +45,7 @@ public class Course {
 	@Column
 	private String    building;
 	@Column
-	private int       roomNumber;
+	private String    roomNumber;
 	@Column
 	private String    term;
 	@Column
@@ -58,4 +58,135 @@ public class Course {
 	private int       crn;
 	@Column
 	private int       maxCapacity;
+
+	public Course (String name, int credits, String subjectCode, String classNumber, String description, String degreeLevel, String term, int crn, int maxCapacity) {
+		this.name = name;
+		this.credits = credits;
+		this.subjectCode = subjectCode;
+		this.classNumber = classNumber;
+		this.description = description;
+		this.degreeLevel = degreeLevel;
+		this.term = term;
+		this.crn = crn;
+		this.maxCapacity = maxCapacity;
+	}
+
+	public Course () {
+	}
+
+	public Long getId () {
+		return id;
+	}
+
+	public String getName () {
+		return name;
+	}
+
+	public void setName (String name) {
+		this.name = name;
+	}
+
+	public int getCredits () {
+		return credits;
+	}
+
+	public void setCredits (int credits) {
+		this.credits = credits;
+	}
+
+	public String getClassNumber () {
+		return classNumber;
+	}
+
+	public void setClassNumber (String classNumber) {
+		this.classNumber = classNumber;
+	}
+
+	public String getDescription () {
+		return description;
+	}
+
+	public void setDescription (String description) {
+		this.description = description;
+	}
+
+	public String getDegreeLevel () {
+		return degreeLevel;
+	}
+
+	public void setDegreeLevel (String degreeLevel) {
+		this.degreeLevel = degreeLevel;
+	}
+
+	public String getSubjectCode () {
+		return subjectCode;
+	}
+
+	public void setSubjectCode (String subjectCode) {
+		this.subjectCode = subjectCode;
+	}
+
+	public String getBuilding () {
+		return building;
+	}
+
+	public void setBuilding (String building) {
+		this.building = building;
+	}
+
+	public String getRoomNumber () {
+		return roomNumber;
+	}
+
+	public void setRoomNumber (String roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	public String getTerm () {
+		return term;
+	}
+
+	public void setTerm (String term) {
+		this.term = term;
+	}
+
+	public LocalTime getStartTime () {
+		return startTime;
+	}
+
+	public void setStartTime (LocalTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalTime getEndTime () {
+		return endTime;
+	}
+
+	public void setEndTime (LocalTime endTime) {
+		this.endTime = endTime;
+	}
+
+	public String getDays () {
+		return days;
+	}
+
+	public void setDays (String days) {
+		this.days = days;
+	}
+
+	public int getCrn () {
+		return crn;
+	}
+
+	public void setCrn (int crn) {
+		this.crn = crn;
+	}
+
+	public int getMaxCapacity () {
+		return maxCapacity;
+	}
+
+	public void setMaxCapacity (int maxCapacity) {
+		this.maxCapacity = maxCapacity;
+	}
 }

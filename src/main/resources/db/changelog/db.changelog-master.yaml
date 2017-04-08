@@ -57,7 +57,7 @@ databaseChangeLog:
                   type: varchar(50)
               - column:
                   name: roomNumber
-                  type: int
+                  type: varchar(50)
               - column:
                   name: term
                   type: varchar(50)

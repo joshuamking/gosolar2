@@ -42,7 +42,7 @@ public class CourseController {
 	@GetMapping ("/{name}")
 	@ResponseBody
 	public Course save (@PathVariable ("name") String name) {
-		Course course = new Course();
+		Course course = new Course(name, 3, "Math", "3030", "The desc.", "Undergraduate", "Spring 2017", 72646, 125);
 		courseRepository.save(course);
 
 		return course;
