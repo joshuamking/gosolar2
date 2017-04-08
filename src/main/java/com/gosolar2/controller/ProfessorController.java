@@ -23,7 +23,7 @@ public class ProfessorController {
 		this.professorRepository = professorRepository;
 	}
 
-	@GetMapping ("/")
+	@GetMapping ({"/", ""})
 	@ResponseBody
 	public Iterable<Professor> list () {
 		Professor professor = new Professor();

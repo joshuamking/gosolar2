@@ -42,7 +42,7 @@ public class CourseController {
 		return courseRepository.save(newCourse);
 	}
 
-	@GetMapping ("/")
+	@GetMapping ({"/", ""})
 	@ResponseBody
 	public Iterable<Course> list () {
 		return this.courseRepository.findAll();
