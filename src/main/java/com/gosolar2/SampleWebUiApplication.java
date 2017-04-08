@@ -39,10 +39,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-//@SpringBootApplication
-//@EnableAutoConfiguration (exclude = {
-//		JpaRepositoriesAutoConfiguration.class
-//})
 @Controller
 @ComponentScan ("com.gosolar2")
 @RestController
@@ -52,7 +48,6 @@ import java.nio.file.Files;
 @ComponentScan
 @EnableJpaRepositories
 @SpringBootApplication
-//@ImportResource ("classpath:applicationContext.xml")
 public class SampleWebUiApplication {
 
 	private String databaseDriver = Driver.class.getName();
