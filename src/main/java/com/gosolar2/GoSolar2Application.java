@@ -34,10 +34,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 
 @Controller
 @ComponentScan ("com.gosolar2")
@@ -65,13 +67,19 @@ public class GoSolar2Application {
 
 	@GetMapping ("/**")
 	@ResponseBody
-	public String home (HttpServletRequest request) throws IOException {
-		String path = request.getServletPath();
-		if (!path.contains(".")) { path += "/index.html"; }
-		// TODO: 4/8/17 Remove once we have a favicon.ico @solo
-		if (path.contains("favicon.ico")) { return null; }
-		File file = new File("src/main/resources/site/" + path);
-		return Files.readAllLines(file.toPath()).stream().map(s -> s + "\n").reduce(String::concat).get();
+	public String home (HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
+			String path = request.getServletPath();
+			if (!path.contains(".")) { path += "/index.html"; }
+			// TODO: 4/8/17 Remove once we have a favicon.ico @solo
+			if (path.contains("favicon.ico")) { return null; }
+			File file = new File("src/main/resources/site/" + path);
+			return Files.readAllLines(file.toPath()).stream().map(s -> s + "\n").reduce(String::concat).get();
+		}
+		catch (NoSuchFileException e) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found!\n --------- \n" + e.getMessage());
+			return null;
+		}
 	}
 
 	@Bean

@@ -22,6 +22,7 @@ import com.gosolar2.repository.CourseRepository;
 import com.gosolar2.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,5 +71,22 @@ public class CourseController {
 	@ResponseBody
 	public void deleteById (@PathVariable ("courseId") long courseId) {
 		courseRepository.delete(courseId);
+	}
+
+	@GetMapping ("/{courseId}/setProfessor/{professorId}")
+	@ResponseBody
+	public Pair<Course, Professor> addCourseToProfessor (@PathVariable ("professorId") Long professorId, @PathVariable ("courseId") Long courseId) {
+		Course course = courseRepository.findOne(courseId);
+		Professor professor = professorRepository.findOne(professorId);
+		course.setProfessor(professor);
+		return Pair.of(courseRepository.save(course), professor);
+	}
+
+	@GetMapping ("/{courseId}/removeProfessor")
+	@ResponseBody
+	public Course removeCourseFromProfessor (@PathVariable ("courseId") Long courseId) {
+		Course course = courseRepository.findOne(courseId);
+		course.setProfessor(null);
+		return courseRepository.save(course);
 	}
 }

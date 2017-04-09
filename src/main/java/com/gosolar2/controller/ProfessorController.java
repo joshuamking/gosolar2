@@ -25,9 +25,21 @@ public class ProfessorController {
 		return this.professorRepository.findAll();
 	}
 
-	@PostMapping ({"/new", "create"})
+	@PostMapping ({"/new", "/create"})
 	@ResponseBody
 	public Professor createNew (@RequestBody Professor professor) {
 		return professorRepository.save(professor);
+	}
+
+	@GetMapping ("/{professorId}")
+	@ResponseBody
+	public Professor findById (@PathVariable ("professorId") Long professorId) {
+		return professorRepository.findOne(professorId);
+	}
+
+	@DeleteMapping ("/{professorId}")
+	@ResponseBody
+	public void deleteById (@PathVariable ("professorId") Long professorId) {
+		professorRepository.delete(professorId);
 	}
 }
