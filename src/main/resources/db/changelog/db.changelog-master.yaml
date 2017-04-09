@@ -167,3 +167,19 @@ databaseChangeLog:
               - column:
                   name: officeLocation
                   type: varchar(255)
+  - changeSet:
+      id: "added professorId to course table"
+      author: josh
+      changes:
+        - addColumn:
+            tableName: course
+            columns:
+              - column:
+                  name: professorId
+                  type: int
+        - addForeignKeyConstraint:
+            baseColumnNames: professorId
+            baseTableName: course
+            constraintName: fk_course_professor
+            referencedColumnNames: id
+            referencedTableName: professor

@@ -15,8 +15,6 @@ public class User {
 	private                                                      String email;
 	private                                                      String password;
 	private                                                      String phoneNumber;
-//	@ManyToMany (targetEntity = Course.class/*, mappedBy = "id"*/) private Set<Course> classes;
-
 
 	public Long getId () {
 		return id;

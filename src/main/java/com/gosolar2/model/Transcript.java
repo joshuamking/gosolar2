@@ -1,13 +1,11 @@
 package com.gosolar2.model;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 /**
  * Created by pranathi on 4/7/17.
  */
 @Entity
-@Transactional
 @Table (name = "course")
 public class Transcript {
 	@Id

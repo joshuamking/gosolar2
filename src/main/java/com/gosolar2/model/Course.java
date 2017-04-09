@@ -13,17 +13,16 @@
 
 package com.gosolar2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gosolar2.converters.LocalTimeToIntConverter;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.time.LocalTime;
 
 /**
  * Created by Joshua King on 4/7/17.
  */
 @Entity
-@Transactional
 @Table (name = "course")
 public class Course {
 	@Id
@@ -43,6 +42,8 @@ public class Course {
 	private                                                      String    days;
 	private                                                      int       crn;
 	private                                                      int       maxCapacity;
+	@ManyToOne (targetEntity = Professor.class)
+	@JoinColumn (name = "professorId") private                   Professor professor;
 
 	public Course (String name, int credits, String subjectCode, String classNumber, String description, String degreeLevel, String term, int crn, int maxCapacity) {
 		this.name = name;
@@ -57,6 +58,19 @@ public class Course {
 	}
 
 	public Course () {
+	}
+
+	public Long getProfessorId () {
+		return professor == null ? null : professor.getId();
+	}
+
+	@JsonIgnore
+	public Professor getProfessor () {
+		return professor;
+	}
+
+	public void setProfessor (Professor professor) {
+		this.professor = professor;
 	}
 
 	public Long getId () {

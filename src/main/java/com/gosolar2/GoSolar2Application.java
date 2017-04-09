@@ -48,12 +48,12 @@ import java.nio.file.Files;
 @ComponentScan
 @EnableJpaRepositories
 @SpringBootApplication
-public class SampleWebUiApplication {
+public class GoSolar2Application {
 
 	private String databaseDriver = Driver.class.getName();
 
 	public static void main (String[] args) throws Exception {
-		SpringApplication.run(SampleWebUiApplication.class, args);
+		SpringApplication.run(GoSolar2Application.class, args);
 
 		try {
 			Runtime.getRuntime().exec("open http://localhost:8000/student/");

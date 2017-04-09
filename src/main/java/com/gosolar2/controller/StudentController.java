@@ -21,7 +21,7 @@ public class StudentController {
 		this.studentRepository = studentRepository;
 	}
 
-	@GetMapping ({"/", ""})
+	@GetMapping ("")
 	@ResponseBody
 	public Iterable<Student> list () {
 		Student user = new Student();

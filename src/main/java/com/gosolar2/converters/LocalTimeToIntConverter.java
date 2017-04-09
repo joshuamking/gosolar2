@@ -11,13 +11,14 @@ import java.time.LocalTime;
 public class LocalTimeToIntConverter implements AttributeConverter<LocalTime, Integer> {
 
 	@Override public Integer convertToDatabaseColumn (LocalTime localTime) {
+		if (localTime == null) { return null; }
 		int hourMills = localTime.getHour() * 60 * 60;
 		int minMills = localTime.getMinute() * 60;
 		int secMills = localTime.getSecond();
 		return hourMills + minMills + secMills;
 	}
 
-	@Override public LocalTime convertToEntityAttribute (Integer s) {
-		return LocalTime.ofSecondOfDay(s);
+	@Override public LocalTime convertToEntityAttribute (Integer i) {
+		return i == null ? null : LocalTime.ofSecondOfDay(i);
 	}
 }
