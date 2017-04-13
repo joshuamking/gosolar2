@@ -199,4 +199,29 @@ databaseChangeLog:
             constraintName: fk_student_user
             referencedColumnNames: id
             referencedTableName: user
+  - changeSet:
+      id: "added table for many to many relationship courses to students"
+      author: josh
+      changes:
+        - createTable:
+            tableName: student_courses
+            columns:
+              - column:
+                  name: student_id
+                  type: int
+              - column:
+                  name: course_id
+                  type: int
+        - addForeignKeyConstraint:
+            baseColumnNames: student_id
+            baseTableName: student_courses
+            constraintName: fk_studentCourses_to_student
+            referencedColumnNames: id
+            referencedTableName: student
+        - addForeignKeyConstraint:
+            baseColumnNames: course_id
+            baseTableName: student_courses
+            constraintName: fk_studentCourses_to_course
+            referencedColumnNames: id
+            referencedTableName: course
 # todo  --  id: "create new table for many to many relationship between courses and student"

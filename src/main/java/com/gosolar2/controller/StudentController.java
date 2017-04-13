@@ -1,6 +1,8 @@
 package com.gosolar2.controller;
 
+import com.gosolar2.model.Course;
 import com.gosolar2.model.Student;
+import com.gosolar2.repository.CourseRepository;
 import com.gosolar2.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,9 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping ("/student")
 public class StudentController {
 	private final StudentRepository studentRepository;
+	private final CourseRepository  courseRepository;
 
-	@Autowired public StudentController (@Qualifier ("studentRepository") StudentRepository studentRepository) {
+	@Autowired
+	public StudentController (@Qualifier ("studentRepository") StudentRepository studentRepository, @Qualifier ("courseRepository") CourseRepository courseRepository) {
 		this.studentRepository = studentRepository;
+		this.courseRepository = courseRepository;
 	}
 
 	@GetMapping ("")
@@ -35,6 +40,26 @@ public class StudentController {
 	@ResponseBody
 	public Student findById (@PathVariable ("studentId") Long studentId) {
 		return studentRepository.findOne(studentId);
+	}
+
+	@GetMapping ("/{studentId}/registerForCourse/{courseId}")
+	@ResponseBody
+	public Student registerForCourse (@PathVariable ("studentId") Long studentId, @PathVariable ("courseId") Long courseId) {
+		Student student = studentRepository.findOne(studentId);
+		Course course = courseRepository.findOne(courseId);
+		course.getStudents().add(student);
+		courseRepository.save(course);
+		return student;
+	}
+
+	@GetMapping ("/{studentId}/unregisterForCourse/{courseId}")
+	@ResponseBody
+	public Student unregisterForCourse (@PathVariable ("studentId") Long studentId, @PathVariable ("courseId") Long courseId) {
+		Student student = studentRepository.findOne(studentId);
+		Course course = courseRepository.findOne(courseId);
+		course.getStudents().remove(student);
+		courseRepository.save(course);
+		return student;
 	}
 
 	@DeleteMapping ("/{studentId}")

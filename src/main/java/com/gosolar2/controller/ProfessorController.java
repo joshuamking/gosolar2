@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.*;
 public class ProfessorController {
 	private final ProfessorRepository professorRepository;
 
-	@Autowired public ProfessorController (@Qualifier ("professorRepository") ProfessorRepository professorRepository) {
+	@Autowired
+	public ProfessorController (@Qualifier ("professorRepository") ProfessorRepository professorRepository) {
 		this.professorRepository = professorRepository;
 	}
 

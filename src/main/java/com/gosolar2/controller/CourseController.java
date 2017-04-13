@@ -36,7 +36,8 @@ public class CourseController {
 	private final CourseRepository    courseRepository;
 	private final ProfessorRepository professorRepository;
 
-	@Autowired public CourseController (@Qualifier ("courseRepository") CourseRepository courseRepository,
+	@Autowired
+	public CourseController (@Qualifier ("courseRepository") CourseRepository courseRepository,
 										@Qualifier ("professorRepository") ProfessorRepository professorRepository) {
 		this.courseRepository = courseRepository;
 		this.professorRepository = professorRepository;

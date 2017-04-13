@@ -10,7 +10,8 @@ import java.time.LocalTime;
 @Converter
 public class LocalTimeToIntConverter implements AttributeConverter<LocalTime, Integer> {
 
-	@Override public Integer convertToDatabaseColumn (LocalTime localTime) {
+	@Override
+	public Integer convertToDatabaseColumn (LocalTime localTime) {
 		if (localTime == null) { return null; }
 		int hourMills = localTime.getHour() * 60 * 60;
 		int minMills = localTime.getMinute() * 60;
@@ -18,7 +19,8 @@ public class LocalTimeToIntConverter implements AttributeConverter<LocalTime, In
 		return hourMills + minMills + secMills;
 	}
 
-	@Override public LocalTime convertToEntityAttribute (Integer i) {
+	@Override
+	public LocalTime convertToEntityAttribute (Integer i) {
 		return i == null ? null : LocalTime.ofSecondOfDay(i);
 	}
 }
