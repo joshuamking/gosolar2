@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 /**
  * Created by Joshua King on 4/8/17.
  */
@@ -44,12 +47,18 @@ public class StudentController {
 
 	@GetMapping ("/{studentId}/registerForCourse/{courseId}")
 	@ResponseBody
-	public Student registerForCourse (@PathVariable ("studentId") Long studentId, @PathVariable ("courseId") Long courseId) {
-		Student student = studentRepository.findOne(studentId);
-		Course course = courseRepository.findOne(courseId);
-		course.getStudents().add(student);
-		courseRepository.save(course);
-		return student;
+	public Student registerForCourse (@PathVariable ("studentId") Long studentId, @PathVariable ("courseId") Long courseId, HttpServletResponse response) throws IOException {
+		try {
+			Student student = studentRepository.findOne(studentId);
+			Course course = courseRepository.findOne(courseId);
+			course.getStudents().add(student);
+			courseRepository.save(course);
+			return student;
+		}
+		catch (NullPointerException e) {
+			response.sendError(404, e.getMessage());
+			return null;
+		}
 	}
 
 	@GetMapping ("/{studentId}/unregisterForCourse/{courseId}")

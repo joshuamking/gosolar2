@@ -16,7 +16,6 @@
 
 package com.gosolar2;
 
-import com.mysql.jdbc.Driver;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,6 +23,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.sqlite.JDBC;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,9 +51,10 @@ import java.nio.file.NoSuchFileException;
 @ComponentScan
 @EnableJpaRepositories
 @SpringBootApplication
+@ImportResource (value = "classpath:applicationContext.xml")
 public class GoSolar2Application {
 
-	private String databaseDriver = Driver.class.getName();
+	private String databaseDriver = JDBC.class.getName();
 
 	public static void main (String[] args) throws Exception {
 		SpringApplication.run(GoSolar2Application.class, args);
@@ -99,9 +101,9 @@ public class GoSolar2Application {
 	@Bean
 	public DataSource dataSource () {
 		return DataSourceBuilder.create()
-								.url("jdbc:mysql://localhost:3306/gosolar2")
-								.username("root")
-								.password("root")
+								.url("jdbc:sqlite:gosolar2.db")
+//								.username("root")
+//								.password("root")
 								.driverClassName(databaseDriver)
 								.build();
 	}
