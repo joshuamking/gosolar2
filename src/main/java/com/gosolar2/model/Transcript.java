@@ -10,9 +10,10 @@ import javax.persistence.*;
 public class Transcript {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private Long    id;
-	private boolean isOfficial;
-	private boolean isGraduate;
+	private                               Long    id;
+	private                               boolean isOfficial;
+	private                               boolean isGraduate;
+	@ManyToOne (optional = false) private Student student;
 
 	public Long getId () {
 		return id;
@@ -32,5 +33,13 @@ public class Transcript {
 
 	public void setIsGraduate (boolean isGraduate) {
 		this.isGraduate = isGraduate;
+	}
+
+	public Student getStudent () {
+		return student;
+	}
+
+	public void setStudent (Student student) {
+		this.student = student;
 	}
 }

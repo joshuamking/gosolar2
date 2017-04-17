@@ -1,6 +1,7 @@
 package com.gosolar2.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Joshua King on 4/7/17.
@@ -9,12 +10,14 @@ import javax.persistence.*;
 @Table (name = "user")
 @Inheritance (strategy = InheritanceType.JOINED)
 public class User {
-	@Id @GeneratedValue (strategy = GenerationType.AUTO) private Long   id;
-	private                                                      String firstName;
-	private                                                      String lastName;
-	private                                                      String email;
-	private                                                      String password;
-	private                                                      String phoneNumber;
+	@Id @GeneratedValue (strategy = GenerationType.AUTO) private Long                   id;
+	private                                                      String                 firstName;
+	private                                                      String                 lastName;
+	private                                                      String                 email;
+	private                                                      String                 password;
+	private                                                      String                 phoneNumber;
+	@OneToMany (cascade = CascadeType.ALL, targetEntity = EmergencyContact.class, mappedBy = "user")
+	private                                                      List<EmergencyContact> emergencyContacts;
 
 	public Long getId () {
 		return id;
@@ -26,6 +29,14 @@ public class User {
 
 	public void setFirstName (String firstName) {
 		this.firstName = firstName;
+	}
+
+	public List<EmergencyContact> getEmergencyContacts () {
+		return emergencyContacts;
+	}
+
+	public void setEmergencyContacts (List<EmergencyContact> emergencyContacts) {
+		this.emergencyContacts = emergencyContacts;
 	}
 
 	public String getLastName () {

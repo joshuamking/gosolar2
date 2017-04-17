@@ -2,10 +2,7 @@ package com.gosolar2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -14,10 +11,20 @@ import java.util.List;
 @Entity
 @Table (name = "student")
 public class Student extends User {
-	private String       major;
-	private boolean      isTA;
+	private String           major;
+	private boolean          isTA;
 	@ManyToMany (mappedBy = "students", cascade = CascadeType.ALL)
-	private List<Course> courses;
+	private List<Course>     courses;
+	@OneToMany (cascade = CascadeType.ALL, targetEntity = Transcript.class, mappedBy = "student")
+	private List<Transcript> transcripts;
+
+	public List<Transcript> getTranscripts () {
+		return transcripts;
+	}
+
+	public void setTranscripts (List<Transcript> transcripts) {
+		this.transcripts = transcripts;
+	}
 
 	public boolean getIsTA () {
 		return isTA;
