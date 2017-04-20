@@ -141,15 +141,54 @@ function getTrans(json) {
 	var transP = JSON.parse(json);
 }
 
-function removeClass(classId){
+function removeClass(classId) {
 	console.log("remove me");
 }
-
 
 $(document).ready(function () {
 	loadContent(true);
 	setTimeout(function () {
 		getParams();
+		$('.removeClass').click(function () {
+			var id = $(this).id;
+			removeClass(id);
+		});
+		$("#addContactDialog").dialog({
+			autoOpen: false,
+			show: {
+				effect: "blind",
+				duration: 1000
+			},
+			hide: {
+				effect: "explode",
+				duration: 1000
+			}
+		});
+		$(".addContact").on("click", function () {
+			$("#addContactDialog").dialog("open");
+		})
+		$("#addContactDialogSubmitButton").on("click", function () {
+			var settings = {
+				"async": true,
+				"crossDomain": true,
+				"url": link + "/student/" + student_id + "/newEmergencyContact",
+				"method": "POST",
+				"headers": {
+					"content-type": "application/json"
+				},
+				"processData": false,
+				"data": {
+					"name": $("#addContactDialogName").val(),
+					"address": "",
+					"phoneNumber": $("#addContactDialogPhone").val(),
+					"relationship": ""
+				}
+			}
+
+			$.ajax(settings).done(function (response) {
+				console.log(response);
+			});
+		})
 	}, 50);
 	$('.removeClass').click(function(){
 		console.log("remove me");

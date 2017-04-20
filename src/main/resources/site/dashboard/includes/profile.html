@@ -12,9 +12,9 @@
 		<span class="topic">Add/Remove Classes</span>
 		<table class="classes">
 			<tbody id="tableData">
-				<tr style="width: 100%">
-					<td style="width: 100%" colspan="0">Loading Classes...</td>
-				</tr>
+			<tr style="width: 100%">
+				<td style="width: 100%" colspan="0">Loading Classes...</td>
+			</tr>
 			</tbody>
 		</table>
 		<div class="addClass">+ Add Class</div>
@@ -23,16 +23,20 @@
 		<span class="topic">Emergency Contact Information</span>
 		<table class="econtacts">
 			<tbody id="tableDataE">
-				<tr style="width: 100%">
-					<td style="width: 100%" colspan="0">Loading Details...</td>
-				</tr>
+			<tr style="width: 100%">
+				<td style="width: 100%" colspan="0">Loading Details...</td>
+			</tr>
 			</tbody>
 		</table>
 		<div class="addContact">+ Add Contact</div>
 
 		<div id="addContactDialog" title="Add New Emergency Contact">
-			<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-			<input type="text" placeholder="Name">
+			<input id="addContactDialogName" type="text" placeholder="Name"/>
+			<br/>
+			<input id="addContactDialogPhone" type="tel" placeholder="Phone Number"/>
+			<br/>
+			<hr/>
+			<button id="addContactDialogSubmitButton">Add</button>
 		</div>
 	</div>
 	<div class="requestTranscript">
