@@ -1,5 +1,5 @@
-INSERT INTO `user` VALUES (1, 'pvenigandla2@student.gsu.edu', 'Pranathi', 'Venigandla', '1234', '1234567890', 0);
-INSERT INTO `user` VALUES (2, 'jbhola@gsu.edu', 'Jaman', 'Bhola', '1234', '1234567890', 1);
+INSERT INTO `user` VALUES (1, 'jbhola@gsu.edu', 'Jaman', 'Bhola', '1234', '1234567890', 0);
+INSERT INTO `user` VALUES (2, 'jbhola_professor@gsu.edu', 'Jaman', 'Bhola', '1234', '1234567890', 1);
 INSERT INTO `user` VALUES (3, 'jking82@student.gsu.edu', 'Joshua', 'King', '1234', '1234567890', 2);
 INSERT INTO `user` VALUES (4, 'sarnett4@student.gsu.edu', 'Solomon', 'Arnett', '1234', '1234567890', 2);
 INSERT INTO `transcript` VALUES (1, X'aced00057372000d6a6176612e74696d652e536572955d84ba1b2248b20c00007870770703000007e1041478', 1, 1);
