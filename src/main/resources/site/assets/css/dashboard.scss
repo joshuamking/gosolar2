@@ -8,7 +8,7 @@ body{
 	// border: solid 5px black;
 	// min-height: calc(100vh - 10px);
 	
-	width: 100vw;
+	// width: 100vw;
 	min-width: 530px;
 	min-height: 100vh;
 }
@@ -21,7 +21,7 @@ body{
 #mainContainer{
 
 	//{ ** ATTRIBUTES
-		width: 100%;
+		width: calc(100% - 10px);
 		border: solid 5px black;
 	//} ** END ATTRIBUTES
 	
@@ -230,7 +230,7 @@ body{
 		}
 	}
 	.emergencyContactTable{
-		margin-top: 80px;
+		margin-top: 120px;
 		width: 100%;
 
 		.topic{
@@ -290,7 +290,7 @@ body{
 						padding-bottom: 20px;
 					//} ** END ATTRIBUTES
 					td, th{
-						width: calc(100% / 4);
+						width: calc(100% / 3);
 						padding: 0;
 						text-align: center;
 						
@@ -359,6 +359,46 @@ body{
 						}
 					}
 				}
+			}
+		}
+	}
+	.requestTranscript{
+		margin-top: 120px;
+		width: 100%;
+
+		.topic{
+			position: relative;
+			float: left;
+			left: 50%;
+			transform: translateX(-50%);
+			clear: both;
+			// padding-bottom: 80px;
+			font-size: 1.2em;
+		}
+		.requestTrans{
+			position: relative;
+			float: left;
+			left: 50%;
+			transform: translateX(-50%);
+			clear: both;
+			margin-top: 40px;
+			// right: 10vw;
+			border: solid 2px black;
+			padding: 10px;
+			background-color: white;
+			color: black;
+
+
+			//{ ** INCLUDES
+				@include quickTransition(all);
+				@include noDecoration();
+				@include notSelectable();
+				cursor: pointer;
+			//} ** END INCLUDES
+			&:hover{
+				background-color: black;
+				color: white;
+
 			}
 		}
 	}

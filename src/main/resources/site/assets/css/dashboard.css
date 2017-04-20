@@ -6,7 +6,6 @@ body {
   position: relative;
   float: left;
   margin: 0;
-  width: 100vw;
   min-width: 530px;
   min-height: 100vh; }
 
@@ -15,7 +14,7 @@ body {
   float: left; }
 
 #mainContainer {
-  width: 100%;
+  width: calc(100% - 10px);
   border: solid 5px black; }
   #mainContainer .title {
     font-size: 2em;
@@ -187,7 +186,7 @@ body {
                 .profile .profileTable table tbody tr td form .submitContainer label:hover .box {
                   background-color: black; }
   .profile .emergencyContactTable {
-    margin-top: 80px;
+    margin-top: 120px;
     width: 100%; }
     .profile .emergencyContactTable .topic {
       position: relative;
@@ -247,7 +246,7 @@ body {
           width: 100%;
           padding-bottom: 20px; }
           .profile .emergencyContactTable table tbody tr td, .profile .emergencyContactTable table tbody tr th {
-            width: calc(100% / 4);
+            width: calc(100% / 3);
             padding: 0;
             text-align: center; }
           .profile .emergencyContactTable table tbody tr th {
@@ -299,5 +298,54 @@ body {
                   margin-left: 0px; }
                 .profile .emergencyContactTable table tbody tr td form .submitContainer label:hover .box {
                   background-color: black; }
+  .profile .requestTranscript {
+    margin-top: 120px;
+    width: 100%; }
+    .profile .requestTranscript .topic {
+      position: relative;
+      float: left;
+      left: 50%;
+      transform: translateX(-50%);
+      clear: both;
+      font-size: 1.2em; }
+    .profile .requestTranscript .requestTrans {
+      position: relative;
+      float: left;
+      left: 50%;
+      transform: translateX(-50%);
+      clear: both;
+      margin-top: 40px;
+      border: solid 2px black;
+      padding: 10px;
+      background-color: white;
+      color: black;
+      -moz-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+      outline: none;
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      /* Chrome/Safari */
+      -moz-user-select: none;
+      /* Firefox */
+      -ms-user-select: none;
+      /* IE10+ */
+      /* Rules below not implemented in browsers yet */
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+      cursor: pointer; }
+      .profile .requestTranscript .requestTrans:visted {
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+        -webkit-tap-highlight-color: transparent; }
+      .profile .requestTranscript .requestTrans:hover {
+        background-color: black;
+        color: white; }
 
 /*# sourceMappingURL=dashboard.css.map */

@@ -13,7 +13,7 @@ var emerTableString = emerTableHeader;
 var login = true;
 var student_id = "";
 
-
+var jsonLoad = "";
 
 function onLoad (){
 	if (login){
@@ -60,18 +60,21 @@ function getParams(){
 }
 
 function populate(json){
-	json = JSON.parse(json);
+	jsonLoad = json;
+	var jsonP = JSON.parse(json);
 	// console.log(json.lastName);
-	student_id = json.id;
+	student_id = jsonP.id;
 	var userDetails = "body>div#mainContainer>div#mainWrapper>div.profile>div.userInfo>div.userDetails>span";
-	$(userDetails + '.firstname').html(json.firstName);
-	$(userDetails + '.lastname').html(json.lastName);
-	if (json.major) {
-		$(userDetails + '.major').html(json.major.replace("+", " "));
+	$(userDetails + '.firstname').html(jsonP.firstName);
+	$(userDetails + '.lastname').html(jsonP.lastName);
+	if (jsonP.major) {
+		$(userDetails + '.major').html(jsonP.major.replace("+", " "));
 	}
 	
 
-	getCourses(json.id);
+	getCourses(jsonP.id);
+
+	getEmer(json);
 
 }
 
@@ -92,7 +95,7 @@ function getCourses(id){
 		console.log(status);
 		if (status == 404) {
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
-			emerTableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Contacts Yet</td></tr>";
+			
 		}else if (result.length > 0) {
 			// console.log(result[0].name);
 			var professor = "";
@@ -101,22 +104,33 @@ function getCourses(id){
 					addClass(result[i].id, result[i].name, "Some Day/Time", "Bhola");
 				}else{
 					addClass(result[i].id, result[i].name, "Some Day/Time", (result[i].professor.firstName + " " + result[i].professor.lastName));
-				}
-
-				for (var j = 0; j < result[i]emergencyContacts.length; j++) {
-					addEmergency(result[i].emergencyContacts[j].id, result[i].emergencyContacts[j].name, result[i].emergencyContacts[j].phonenumber);
-				}
-				
-			}
-			
+				}				
+			}	
 		}else{
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
-			emerTableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Contacts Yet</td></tr>";
 		}
 		$('#tableData').html(tableString);
-		$('#tableDataE').html(emerTableString);
+		
 	  // console.log(tableString);
 	});
+}
+
+function getEmer(json){
+	var emerC = JSON.parse(json);
+	emerC = emerC.emergencyContacts;
+	if (emerC.length > 0) {
+		for (var i = 0; i < emerC.length; i++) {
+			addEmergency(emerC[i].id, emerC[i].name.replace("+", " "), emerC[i].phoneNumber);
+		}
+	}else{
+		emerTableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Contacts Yet</td></tr>";
+	}
+
+	$('#tableDataE').html(emerTableString);
+}
+
+function getTrans(json){
+	var transP = JSON.parse(json);
 }
 
 

@@ -5,28 +5,28 @@ var link = "http://localhost:8000/";
 
 var state = 0;
 
-function assignStrings() {
+function assignStrings(){
 	// console.log(state);
-	switch (state) {
+	switch(state){
 		case 0:
-			if ($("*").hasClass('welcomeTitle')) {
+			if($("*").hasClass('welcomeTitle')){
 				state = 1;
 				$('.welcomeTitle').html(welcomeTitle);
 			}
-			if ($("*").hasClass('loginButton')) {
+			if($("*").hasClass('loginButton')){
 				state = 1;
 				$('.loginButton').html(loginButton);
-				$('.loginButton').click(function () {
+				$('.loginButton').click(function(){
 					displayWrapper(2);
 				});
 			}
-			break;
+		break;
 
 		case 1:
-			if ($("*").hasClass('submit')) {
+			if($("*").hasClass('submit')){
 				state = 2;
 				$('.submit').html(loginButton);
-				$('#submit').click(function (e) {
+				$('#submit').click(function(e){
 					e.preventDefault();
 					var formData = $("form:not(#hiddenForm)").serialize();
 					var password = needleString("password=", formData);
@@ -40,47 +40,44 @@ function assignStrings() {
 				state = 2;
 				$('.header').html(loginText);
 			}
-			break;
+		break;
 		default:
-			if ($("*").hasClass('welcomeTitle')) {
+			if($("*").hasClass('welcomeTitle')){
 				state = 1;
 				$('.welcomeTitle').html(welcomeTitle);
 			}
-			if ($("*").hasClass('loginButton')) {
+			if($("*").hasClass('loginButton')){
 				state = 1;
 				$('.loginButton').html(loginButton);
-				$('.loginButton').click(function () {
+				$('.loginButton').click(function(){
 					displayWrapper(2);
 				});
 			}
+		break;
+	}
+}
+
+function loadIntoContainer(load){
+	switch(load){
+		case 1: $('#mainWrapper').load("includes/welcome.html");
+			break;
+		case 2: $('#mainWrapper').load("includes/loginForm.html");
+			break;
+		default: $('#mainWrapper').load("includes/welcome.html");
 			break;
 	}
 }
 
-function loadIntoContainer(load) {
-	switch (load) {
-		case 1:
-			$('#mainWrapper').load("includes/welcome.html");
-			break;
-		case 2:
-			$('#mainWrapper').load("includes/loginForm.html");
-			break;
-		default:
-			$('#mainWrapper').load("includes/welcome.html");
-			break;
-	}
-}
-
-function displayWrapper(state) {
+function displayWrapper(state){
 	if (state == 1) {
 		animateWrapper(1);
-	} else {
+	}else{
 		animateWrapper(0);
-		setTimeout(function () {
+		setTimeout(function(){
 			loadIntoContainer(state);
-			setTimeout(function () {
+			setTimeout(function(){
 				assignStrings();
-				setTimeout(function () {
+				setTimeout(function(){
 					$('#mainWrapper').animate({
 						opacity: 1
 					}, 200);
@@ -89,17 +86,17 @@ function displayWrapper(state) {
 		}, 210);
 
 	}
-
+	
 }
 
 
-function jsonPost() {
+
+function jsonPost(){
 
 }
 
-function validateLogin(email, pass) {
+function validateLogin(email, pass){
 	var settings = {
-<<<<<<< HEAD
 	  "async": true,
 	  "crossDomain": true,
 	  "url": link + "login",
@@ -108,64 +105,38 @@ function validateLogin(email, pass) {
 	    "content-type": "application/json"
 	  },
 	  "processData": false,
-	  // "data": "{\n\t\"email\": \"pvenigandla2@student.gsu.edu\",\n\t\"password\": \"1234\"\n}"
-	  "data": "{\n\t\"email\": \""+ unescape(email) +"\",\n\t\"password\": \""+ unescape(pass) +"\"\n}"
-=======
-		"async": true,
-		"crossDomain": true,
-		"url": "https://1644cae1.ngrok.io/login",
-		"method": "POST",
-		"headers": {
-			"content-type": "application/json"
-		},
-		"processData": false,
-		// "data": "{\n\t\"email\": \"pvenigandla2@student.gsu.edu\",\n\t\"password\": \"1234\"\n}"
-		"data": "{\n\t\"email\": \"" + unescape(email) + "\",\n\t\"password\": \"" + unescape(pass) + "\"\n}"
->>>>>>> ffd0ce46772a87cf8fbcd62a057995c8bf684273
+	  "data": "{\n\t\"email\": \"pvenigandla2@student.gsu.edu\",\n\t\"password\": \"1234\"\n}"
+	  // "data": "{\n\t\"email\": \""+ unescape(email) +"\",\n\t\"password\": \""+ unescape(pass) +"\"\n}"
 	}
 	//   1234
 
 	$.ajax(settings).done(function (response, status) {
 		// console.log(response);
-		console.log(status);
+		// console.log(status);
 		// console.log(JSON.stringify(response));
 		if (status != 403) {
 			// console.log("response returned");
 			loginAllower(JSON.stringify(response));
-<<<<<<< HEAD
 		}else{
 			// console.log("false returned");
-=======
-		} else {
-			console.log("false returned");
->>>>>>> ffd0ce46772a87cf8fbcd62a057995c8bf684273
 			loginAllower(false);
 		}
 	});
 	// $.post('includes/loginForm.html', { email: uname, password: pword }, function(response, status){
-
+		
 	// 	// return "words";
 	// });
 }
 
-<<<<<<< HEAD
 function loginAllower(json){
 	// console.log(json);
-=======
-function loginAllower(json) {
-	console.log(json);
->>>>>>> ffd0ce46772a87cf8fbcd62a057995c8bf684273
 	if (json) {
 		// console.log(true);
 		// console.log("response returned");
-		if (JSON.parse(json).userType == "Admin") {
-			$('#hiddenForm')[0].action = "admin/";
-		}
-
 		$('#hiddenFormInput').val(json);
 		$('#hiddenSubmit').trigger('click');
-
-	} else {
+		
+	}else{
 		// console.log(json);
 		// console.log("false returned");
 		$('#error').html("Incorrect username or password");
@@ -182,14 +153,19 @@ function loginAllower(json) {
 }
 
 
-$(document).ready(function () {
+
+
+
+
+
+$(document).ready(function(){
 	if (state == 0) {
 		loadIntoContainer(1);
-		setTimeout(function () {
+		setTimeout(function(){
 			assignStrings();
-			setTimeout(function () {
+			setTimeout(function(){
 				displayWrapper(1);
 			}, 100);
 		}, 100);
-	}
+	}	
 });
