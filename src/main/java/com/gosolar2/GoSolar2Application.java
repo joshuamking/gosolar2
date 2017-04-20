@@ -78,15 +78,15 @@ public class GoSolar2Application {
 
 	@GetMapping ("/**")
 	@ResponseBody
-	public String home (HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public byte[] home (HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String path = request.getServletPath();
 		try {
-			if (!path.contains(".")) { path += "index.html"; }
+			if (!path.contains(".")) { path += "/index.html"; }
 			// TODO: 4/8/17 Remove once we have a favicon.ico @solo
 			if (path.contains("favicon.ico")) { return null; }
 
 			ClassLoader classLoader = getClass().getClassLoader();
-			return IOUtils.toString(classLoader.getResourceAsStream("site" + path));
+			return IOUtils.toByteArray(classLoader.getResourceAsStream(("site/" + path).replaceAll("/+", "/")));
 		}
 		catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found!\n --------- \n" + path);
