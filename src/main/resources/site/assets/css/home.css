@@ -120,5 +120,15 @@ body {
       cursor: pointer;
       left: 50%;
       transform: translateX(-50%); }
+  .centerContainer #error {
+    position: relative;
+    float: left;
+    clear: both;
+    width: 100%;
+    text-align: center;
+    color: red; }
+
+#hiddenForm {
+  display: none; }
 
 /*# sourceMappingURL=home.css.map */

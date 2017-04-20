@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css?family=Slabo+13px");
+* {
+  font-family: "Slabo 13px", serif; }
+
+body {
+  position: relative;
+  float: left;
+  width: calc(100vw - 10px);
+  margin: 0;
+  border: solid 5px black;
+  min-height: calc(100vh - 10px);
+  min-width: 530px; }
+
+* {
+  position: relative;
+  float: left; }
+
+#mainContainer {
+  width: 100%; }
+  #mainContainer .title {
+    font-size: 2em;
+    position: absolute;
+    right: 40px;
+    top: 40px; }
+
+.profile {
+  padding: 20px;
+  width: calc(100% - 40px);
+  height: auto; }
+  .profile .userInfo {
+    padding-bottom: 40px;
+    clear: both;
+    height: 140px; }
+    .profile .userInfo .userImage {
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      transform: translateY(-50%);
+      background-image: url("../img/bhola.jpg");
+      background-size: contain;
+      background-position: center; }
+    .profile .userInfo .userDetails {
+      width: calc(50vw - 100px);
+      height: auto;
+      padding-left: 20px;
+      top: 50%;
+      transform: translateY(-50%); }
+      .profile .userInfo .userDetails * {
+        clear: both; }
+      .profile .userInfo .userDetails .firstname {
+        font-size: 1.2em; }
+      .profile .userInfo .userDetails .classification {
+        font-size: 0.7em; }
+      .profile .userInfo .userDetails .major {
+        font-size: 0.6em; }
+  .profile .profileTable {
+    width: 100%; }
+    .profile .profileTable .topic {
+      position: relative;
+      float: left;
+      left: 50%;
+      transform: translateX(-50%);
+      clear: both;
+      padding-bottom: 80px;
+      font-size: 1.2em; }
+    .profile .profileTable table {
+      width: 100%;
+      clear: both;
+      left: 50%;
+      transform: translateX(-50%); }
+      .profile .profileTable table tbody {
+        width: 100%; }
+        .profile .profileTable table tbody tr {
+          width: 100%;
+          padding-bottom: 20px; }
+          .profile .profileTable table tbody tr td, .profile .profileTable table tbody tr th {
+            width: calc(100% / 4);
+            padding: 0;
+            text-align: center; }
+          .profile .profileTable table tbody tr th {
+            padding-bottom: 20px; }
+          .profile .profileTable table tbody tr td form {
+            width: 100%; }
+            .profile .profileTable table tbody tr td form input[type=submit] {
+              display: none; }
+            .profile .profileTable table tbody tr td form .submitContainer {
+              width: auto;
+              height: 100%;
+              left: 50%;
+              transform: translateX(-50%); }
+              .profile .profileTable table tbody tr td form .submitContainer label {
+                -webkit-user-select: none;
+                /* Chrome/Safari */
+                -moz-user-select: none;
+                /* Firefox */
+                -ms-user-select: none;
+                /* IE10+ */
+                /* Rules below not implemented in browsers yet */
+                -o-user-select: none;
+                user-select: none;
+                cursor: default;
+                outline: none;
+                text-decoration: none;
+                color: inherit;
+                -webkit-tap-highlight-color: transparent;
+                cursor: pointer; }
+                .profile .profileTable table tbody tr td form .submitContainer label:visted {
+                  outline: none;
+                  text-decoration: none;
+                  color: inherit;
+                  -webkit-tap-highlight-color: transparent; }
+                .profile .profileTable table tbody tr td form .submitContainer label .box {
+                  height: calc(100% - 4px);
+                  width: auto;
+                  border: 2px solid black;
+                  border-radius: 2px;
+                  margin-left: 5px;
+                  font-size: 0.8em;
+                  padding: 0.2em;
+                  -moz-transition: all 0.2s ease;
+                  -o-transition: all 0.2s ease;
+                  -webkit-transition: all 0.2s ease;
+                  -ms-transition: all 0.2s ease;
+                  transition: all 0.2s ease; }
+                .profile .profileTable table tbody tr td form .submitContainer label:nth-child(1) .box {
+                  margin-left: 0px; }
+                .profile .profileTable table tbody tr td form .submitContainer label:hover .box {
+                  background-color: black;
+                  color: white; }
+
+/*# sourceMappingURL=dashboard.css.map */

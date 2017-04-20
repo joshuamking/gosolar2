@@ -1,0 +1,190 @@
+@import 'variables';
+
+body{
+	position: relative;
+	float: left;
+	width: calc(100vw - 10px);
+	margin: 0;
+	border: solid 5px black;
+	min-height: calc(100vh - 10px);
+	min-width: 530px;
+}
+
+*{
+	position: relative;
+	float: left;
+}
+
+#mainContainer{
+
+	//{ ** ATTRIBUTES
+		width: 100%;
+	//} ** END ATTRIBUTES
+	
+	.title{
+		font-size: 2em;
+		position: absolute;
+		right: 40px;
+		top: 40px;
+	}
+}
+
+.profile{
+
+
+	//{ ** ATTRIBUTES
+		padding: 20px;
+		width: calc(100% - 40px);
+		height: auto;
+	//} ** END ATTRIBUTES
+	
+	.userInfo{
+		
+
+		//{ ** ATTRIBUTES
+			padding-bottom: 40px;
+			clear: both;
+			height: 140px;
+		//} ** END ATTRIBUTES
+		
+		.userImage{
+			width: 100px;
+			height: 100px;
+			// background-color: grey;
+			top: 50%;
+			transform: translateY(-50%);
+			background-image: url("../img/bhola.jpg");
+			background-size: contain;
+			background-position: center;
+
+		}
+
+		.userDetails{
+			width: calc(50vw - 100px);
+			height: auto;
+			padding-left: 20px;
+			top: 50%;
+			transform: translateY(-50%);
+
+			*{
+				clear: both;
+			}
+
+			.firstname{
+				font-size: 1.2em;
+			}
+
+			.classification{
+				font-size: 0.7em;
+			}
+
+			.major{
+				font-size: 0.6em;
+			}
+		}
+	}
+	.profileTable{
+		width: 100%;
+
+		.topic{
+			position: relative;
+			float: left;
+			left: 50%;
+			transform: translateX(-50%);
+			clear: both;
+			padding-bottom: 80px;
+			font-size: 1.2em;
+		}
+		table{
+
+			//{ ** ATTRIBUTES
+				width: 100%;
+				clear: both;
+				left: 50%;
+				transform: translateX(-50%);
+			//} ** END ATTRIBUTES
+			
+			tbody{
+
+				//{ ** ATTRIBUTES
+					width: 100%;
+				//} ** END ATTRIBUTES
+				
+				tr{
+
+					//{ ** ATTRIBUTES
+						width: 100%;
+						padding-bottom: 20px;
+					//} ** END ATTRIBUTES
+					td, th{
+						width: calc(100% / 4);
+						padding: 0;
+						text-align: center;
+						
+					}
+					th{
+						padding-bottom: 20px;
+					}
+					td{
+						form{
+
+							//{ ** ATTRIBUTES
+								width: 100%;
+							//} ** END ATTRIBUTES
+							
+							input[type=submit]{
+								display: none;
+							}
+							.submitContainer{
+
+								//{ ** ATTRIBUTES
+									width: auto;
+									height: 100%;
+									left: 50%;
+									transform: translateX(-50%);
+								//} ** END ATTRIBUTES
+								label{
+
+									//{ ** INCLUDES
+										@include notSelectable();
+										@include noDecoration();
+										cursor: pointer;
+									//} ** END INCLUDES
+									
+									.box{
+										height: calc(100% - 4px);
+										width: auto;
+										border: 2px solid black;
+										border-radius: 2px;
+										margin-left: 5px;
+										font-size: 0.8em;
+										padding: 0.2em;
+
+
+										//{ ** INCLUDES
+											@include quickTransition(all);
+										//} ** END INCLUDES
+										
+									}
+
+									&:nth-child(1){
+										.box{
+											margin-left: 0px;
+										}
+									}
+
+									&:hover{
+										.box{
+											background-color: black;
+											color: white;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

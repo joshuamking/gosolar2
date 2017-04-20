@@ -1,11 +1,16 @@
 <div class="centerContainer">
 	<span class="header"></span>
 	<form action="" method="post">
-		<input type="text" name="username" placeholder="username">
-		<input type="password" name="password" placeholder="password">
+		<input type="text" name="username" placeholder="email">
+		<input id="password" type="password" name="password" placeholder="password">
 		<input id="submit" type="submit" name="submit">
 		<label for="submit">
 			<div class="submit">Submit</div>
 		</label>
+	</form>
+	<span id="error"></span>
+	<form action="dashboard/index.html" method="get" id="hiddenForm">
+		<input id="hiddenFormInput" type="hidden" name="userData" value="1">
+		<input type="submit" name="submit" id="hiddenSubmit">
 	</form>
 </div>

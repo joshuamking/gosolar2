@@ -138,7 +138,20 @@ body{
 				
 			}
 		}
-
-
 	}
+
+	#error{
+		position: relative;
+		float: left;
+		clear: both;
+		width: 100%;
+		text-align: center;
+		color: red;
+	}
+}
+
+
+
+#hiddenForm{
+	display: none;
 }
