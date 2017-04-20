@@ -1,3 +1,8 @@
+/////////////////////////////////////////// link ///////////////////////////////////////////
+// var link = "https://1644cae1.ngrok.io/";
+var link = "http://localhost:8000/";
+/////////////////////////////////////////// end link ///////////////////////////////////////////
+
 var state = 0;
 
 function assignStrings(){
@@ -26,8 +31,8 @@ function assignStrings(){
 					var formData = $("form:not(#hiddenForm)").serialize();
 					var password = needleString("password=", formData);
 					var username = needleString("username=", formData);
-					console.log(password);
-					console.log(username);
+					// console.log(password);
+					// console.log(username);
 					validateLogin(username, password);
 				});
 			}
@@ -94,7 +99,7 @@ function validateLogin(email, pass){
 	var settings = {
 	  "async": true,
 	  "crossDomain": true,
-	  "url": "https://1644cae1.ngrok.io/login",
+	  "url": link + "login",
 	  "method": "POST",
 	  "headers": {
 	    "content-type": "application/json"
@@ -110,10 +115,10 @@ function validateLogin(email, pass){
 		console.log(status);
 		// console.log(JSON.stringify(response));
 		if (status != 403) {
-			console.log("response returned");
+			// console.log("response returned");
 			loginAllower(JSON.stringify(response));
 		}else{
-			console.log("false returned");
+			// console.log("false returned");
 			loginAllower(false);
 		}
 	});
@@ -124,7 +129,7 @@ function validateLogin(email, pass){
 }
 
 function loginAllower(json){
-	console.log(json);
+	// console.log(json);
 	if (json) {
 		// console.log(true);
 		// console.log("response returned");

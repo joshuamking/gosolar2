@@ -5,18 +5,18 @@
 body {
   position: relative;
   float: left;
-  width: calc(100vw - 10px);
   margin: 0;
-  border: solid 5px black;
-  min-height: calc(100vh - 10px);
-  min-width: 530px; }
+  width: 100vw;
+  min-width: 530px;
+  min-height: 100vh; }
 
 * {
   position: relative;
   float: left; }
 
 #mainContainer {
-  width: 100%; }
+  width: 100%;
+  border: solid 5px black; }
   #mainContainer .title {
     font-size: 2em;
     position: absolute;
@@ -86,21 +86,43 @@ body {
       font-size: 1.2em; }
     .profile .profileTable .addClass {
       position: relative;
-      float: right;
-      margin-top: 20px;
-      right: 40px;
+      float: left;
+      left: 50%;
+      transform: translateX(-50%);
+      clear: both;
+      margin-top: 40px;
       border: solid 2px black;
       padding: 10px;
-      background-color: black;
-      color: white;
+      background-color: white;
+      color: black;
       -moz-transition: all 0.2s ease;
       -o-transition: all 0.2s ease;
       -webkit-transition: all 0.2s ease;
       -ms-transition: all 0.2s ease;
-      transition: all 0.2s ease; }
+      transition: all 0.2s ease;
+      outline: none;
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      /* Chrome/Safari */
+      -moz-user-select: none;
+      /* Firefox */
+      -ms-user-select: none;
+      /* IE10+ */
+      /* Rules below not implemented in browsers yet */
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+      cursor: pointer; }
+      .profile .profileTable .addClass:visted {
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+        -webkit-tap-highlight-color: transparent; }
       .profile .profileTable .addClass:hover {
-        background-color: white;
-        color: black; }
+        background-color: black;
+        color: white; }
     .profile .profileTable table {
       width: 100%;
       clear: both;
@@ -148,15 +170,13 @@ body {
                   color: inherit;
                   -webkit-tap-highlight-color: transparent; }
                 .profile .profileTable table tbody tr td form .submitContainer label .box {
-                  height: calc(100% - 4px);
+                  height: 100%;
                   width: auto;
-                  border: 2px solid black;
-                  border-radius: 2px;
                   margin-left: 5px;
                   font-size: 0.8em;
-                  padding: 0.2em;
+                  padding: 5px;
                   color: white;
-                  background-color: black;
+                  background-color: grey;
                   -moz-transition: all 0.2s ease;
                   -o-transition: all 0.2s ease;
                   -webkit-transition: all 0.2s ease;
@@ -165,7 +185,119 @@ body {
                 .profile .profileTable table tbody tr td form .submitContainer label:nth-child(1) .box {
                   margin-left: 0px; }
                 .profile .profileTable table tbody tr td form .submitContainer label:hover .box {
-                  background-color: white;
-                  color: black; }
+                  background-color: black; }
+  .profile .emergencyContactTable {
+    margin-top: 80px;
+    width: 100%; }
+    .profile .emergencyContactTable .topic {
+      position: relative;
+      float: left;
+      left: 50%;
+      transform: translateX(-50%);
+      clear: both;
+      padding-bottom: 80px;
+      font-size: 1.2em; }
+    .profile .emergencyContactTable .addContact {
+      position: relative;
+      float: left;
+      left: 50%;
+      transform: translateX(-50%);
+      clear: both;
+      margin-top: 40px;
+      border: solid 2px black;
+      padding: 10px;
+      background-color: white;
+      color: black;
+      -moz-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+      outline: none;
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      /* Chrome/Safari */
+      -moz-user-select: none;
+      /* Firefox */
+      -ms-user-select: none;
+      /* IE10+ */
+      /* Rules below not implemented in browsers yet */
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+      cursor: pointer; }
+      .profile .emergencyContactTable .addContact:visted {
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+        -webkit-tap-highlight-color: transparent; }
+      .profile .emergencyContactTable .addContact:hover {
+        background-color: black;
+        color: white; }
+    .profile .emergencyContactTable table {
+      width: 100%;
+      clear: both;
+      left: 50%;
+      transform: translateX(-50%); }
+      .profile .emergencyContactTable table tbody {
+        width: 100%; }
+        .profile .emergencyContactTable table tbody tr {
+          width: 100%;
+          padding-bottom: 20px; }
+          .profile .emergencyContactTable table tbody tr td, .profile .emergencyContactTable table tbody tr th {
+            width: calc(100% / 4);
+            padding: 0;
+            text-align: center; }
+          .profile .emergencyContactTable table tbody tr th {
+            padding-bottom: 20px; }
+          .profile .emergencyContactTable table tbody tr td form {
+            width: 100%; }
+            .profile .emergencyContactTable table tbody tr td form input[type=submit] {
+              display: none; }
+            .profile .emergencyContactTable table tbody tr td form .submitContainer {
+              width: auto;
+              height: 100%;
+              left: 50%;
+              transform: translateX(-50%); }
+              .profile .emergencyContactTable table tbody tr td form .submitContainer label {
+                -webkit-user-select: none;
+                /* Chrome/Safari */
+                -moz-user-select: none;
+                /* Firefox */
+                -ms-user-select: none;
+                /* IE10+ */
+                /* Rules below not implemented in browsers yet */
+                -o-user-select: none;
+                user-select: none;
+                cursor: default;
+                outline: none;
+                text-decoration: none;
+                color: inherit;
+                -webkit-tap-highlight-color: transparent;
+                cursor: pointer; }
+                .profile .emergencyContactTable table tbody tr td form .submitContainer label:visted {
+                  outline: none;
+                  text-decoration: none;
+                  color: inherit;
+                  -webkit-tap-highlight-color: transparent; }
+                .profile .emergencyContactTable table tbody tr td form .submitContainer label .box {
+                  height: 100%;
+                  width: auto;
+                  margin-left: 5px;
+                  font-size: 0.8em;
+                  padding: 5px;
+                  color: white;
+                  background-color: grey;
+                  -moz-transition: all 0.2s ease;
+                  -o-transition: all 0.2s ease;
+                  -webkit-transition: all 0.2s ease;
+                  -ms-transition: all 0.2s ease;
+                  transition: all 0.2s ease; }
+                .profile .emergencyContactTable table tbody tr td form .submitContainer label:nth-child(1) .box {
+                  margin-left: 0px; }
+                .profile .emergencyContactTable table tbody tr td form .submitContainer label:hover .box {
+                  background-color: black; }
 
 /*# sourceMappingURL=dashboard.css.map */

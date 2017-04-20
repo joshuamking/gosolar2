@@ -3,11 +3,14 @@
 body{
 	position: relative;
 	float: left;
-	width: calc(100vw - 10px);
+	// width: calc(100vw - 10px);
 	margin: 0;
-	border: solid 5px black;
-	min-height: calc(100vh - 10px);
+	// border: solid 5px black;
+	// min-height: calc(100vh - 10px);
+	
+	width: 100vw;
 	min-width: 530px;
+	min-height: 100vh;
 }
 
 *{
@@ -19,6 +22,7 @@ body{
 
 	//{ ** ATTRIBUTES
 		width: 100%;
+		border: solid 5px black;
 	//} ** END ATTRIBUTES
 	
 	.title{
@@ -107,21 +111,27 @@ body{
 		}
 		.addClass{
 			position: relative;
-			float: right;
-			margin-top: 20px;
-			right: 40px;
+			float: left;
+			left: 50%;
+			transform: translateX(-50%);
+			clear: both;
+			margin-top: 40px;
+			// right: 10vw;
 			border: solid 2px black;
 			padding: 10px;
-			background-color: black;
-			color: white;
+			background-color: white;
+			color: black;
 
 
 			//{ ** INCLUDES
 				@include quickTransition(all);
+				@include noDecoration();
+				@include notSelectable();
+				cursor: pointer;
 			//} ** END INCLUDES
 			&:hover{
-				background-color: white;
-				color: black;
+				background-color: black;
+				color: white;
 
 			}
 		}
@@ -182,15 +192,15 @@ body{
 									//} ** END INCLUDES
 									
 									.box{
-										height: calc(100% - 4px);
+										height: 100%;
 										width: auto;
-										border: 2px solid black;
-										border-radius: 2px;
+										// border: 2px solid grey;
+										// border-radius: 2px;
 										margin-left: 5px;
 										font-size: 0.8em;
-										padding: 0.2em;
+										padding: 5px;
 										color: white;
-										background-color: black;
+										background-color: grey;
 
 
 										//{ ** INCLUDES
@@ -207,8 +217,141 @@ body{
 
 									&:hover{
 										.box{
-											background-color: white;
-											color: black;
+											background-color: black;
+											// color: white;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.emergencyContactTable{
+		margin-top: 80px;
+		width: 100%;
+
+		.topic{
+			position: relative;
+			float: left;
+			left: 50%;
+			transform: translateX(-50%);
+			clear: both;
+			padding-bottom: 80px;
+			font-size: 1.2em;
+		}
+		.addContact{
+			position: relative;
+			float: left;
+			left: 50%;
+			transform: translateX(-50%);
+			clear: both;
+			margin-top: 40px;
+			// right: 10vw;
+			border: solid 2px black;
+			padding: 10px;
+			background-color: white;
+			color: black;
+
+
+			//{ ** INCLUDES
+				@include quickTransition(all);
+				@include noDecoration();
+				@include notSelectable();
+				cursor: pointer;
+			//} ** END INCLUDES
+			&:hover{
+				background-color: black;
+				color: white;
+
+			}
+		}
+		table{
+
+			//{ ** ATTRIBUTES
+				width: 100%;
+				clear: both;
+				left: 50%;
+				transform: translateX(-50%);
+			//} ** END ATTRIBUTES
+			
+			tbody{
+
+				//{ ** ATTRIBUTES
+					width: 100%;
+				//} ** END ATTRIBUTES
+				
+				tr{
+
+					//{ ** ATTRIBUTES
+						width: 100%;
+						padding-bottom: 20px;
+					//} ** END ATTRIBUTES
+					td, th{
+						width: calc(100% / 4);
+						padding: 0;
+						text-align: center;
+						
+					}
+					th{
+						padding-bottom: 20px;
+					}
+					td{
+						form{
+
+							//{ ** ATTRIBUTES
+								width: 100%;
+							//} ** END ATTRIBUTES
+							
+							input[type=submit]{
+								display: none;
+							}
+							.submitContainer{
+
+								//{ ** ATTRIBUTES
+									width: auto;
+									height: 100%;
+									left: 50%;
+									transform: translateX(-50%);
+								//} ** END ATTRIBUTES
+								label{
+
+									//{ ** INCLUDES
+										@include notSelectable();
+										@include noDecoration();
+										cursor: pointer;
+									//} ** END INCLUDES
+									
+									.box{
+										height: 100%;
+										width: auto;
+										// border: 2px solid grey;
+										// border-radius: 2px;
+										margin-left: 5px;
+										font-size: 0.8em;
+										padding: 5px;
+										color: white;
+										background-color: grey;
+
+
+										//{ ** INCLUDES
+											@include quickTransition(all);
+										//} ** END INCLUDES
+										
+									}
+
+									&:nth-child(1){
+										.box{
+											margin-left: 0px;
+										}
+									}
+
+									&:hover{
+										.box{
+											background-color: black;
+											// color: white;
 										}
 									}
 								}

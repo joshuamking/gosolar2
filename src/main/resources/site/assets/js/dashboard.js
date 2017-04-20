@@ -1,10 +1,14 @@
 /////////////////////////////////////////// link ///////////////////////////////////////////
-var link = "https://1644cae1.ngrok.io/";
+// var link = "https://1644cae1.ngrok.io/";
+var link = "http://localhost:8000/";
 /////////////////////////////////////////// end link ///////////////////////////////////////////
 
 var tableHeader = "<tr><th>Class Name</th><th>Day/Time</th><th>Instructor</th><th>Options</th></tr>";
 
 var tableString = tableHeader;
+
+var emerTableHeader = "<tr><th>Name</th><th>Phone Number</th><th>Options</th></tr>";
+var emerTableString = emerTableHeader;
 
 var login = true;
 var student_id = "";
@@ -21,6 +25,10 @@ function onLoad (){
 
 function addClass(id, classname, classday, professor){
 	tableString += "<tr><td>"+classname+"</td><td>"+classday+"</td><td>"+professor+"</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"submit_remove"+id+"\"><div class=\"submitContainer\"><label for=\"submit_remove"+id+"\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
+}
+
+function addEmergency(id, name, phonenumber){
+	emerTableString += "<tr><td>"+name+"</td><td>"+phonenumber+"</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"emSubmit_remove"+id+"\"><div class=\"submitContainer\"><label for=\"emSubmit_remove"+id+"\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
 }
 
 function checkLogin(json){
@@ -58,7 +66,10 @@ function populate(json){
 	var userDetails = "body>div#mainContainer>div#mainWrapper>div.profile>div.userInfo>div.userDetails>span";
 	$(userDetails + '.firstname').html(json.firstName);
 	$(userDetails + '.lastname').html(json.lastName);
-	$(userDetails + '.major').html(json.major.replace("+", " "));
+	if (json.major) {
+		$(userDetails + '.major').html(json.major.replace("+", " "));
+	}
+	
 
 	getCourses(json.id);
 
@@ -73,12 +84,16 @@ function getCourses(id){
 	  "headers": {}
 	}
 
-	$.ajax(settings).done(function (response) {
+	$.ajax(settings).done(function (response, status) {
 		var result = JSON.stringify(response);
 		result = JSON.parse(result);
 		// console.log("result length is " + result.length);
 		// 
-		if (result.length > 0) {
+		console.log(status);
+		if (status == 404) {
+			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
+			emerTableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Contacts Yet</td></tr>";
+		}else if (result.length > 0) {
 			// console.log(result[0].name);
 			var professor = "";
 			for (var i = 0; i < result.length; i++) {
@@ -87,13 +102,19 @@ function getCourses(id){
 				}else{
 					addClass(result[i].id, result[i].name, "Some Day/Time", (result[i].professor.firstName + " " + result[i].professor.lastName));
 				}
+
+				for (var j = 0; j < result[i]emergencyContacts.length; j++) {
+					addEmergency(result[i].emergencyContacts[j].id, result[i].emergencyContacts[j].name, result[i].emergencyContacts[j].phonenumber);
+				}
 				
 			}
-			$('#tableData').html(tableString);
+			
 		}else{
-			// console.log("result is 0");
+			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
+			emerTableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Contacts Yet</td></tr>";
 		}
-		
+		$('#tableData').html(tableString);
+		$('#tableDataE').html(emerTableString);
 	  // console.log(tableString);
 	});
 }
