@@ -24,11 +24,11 @@ function onLoad() {
 }
 
 function addClass(id, classname, classday, professor) {
-	tableString += "<tr><td>" + classname + "</td><td>" + classday + "</td><td>" + professor + "</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"submit_remove" + id + "\"><div class=\"submitContainer\"><label for=\"submit_remove" + id + "\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
+	tableString += "<tr><td>" + classname + "</td><td>" + classday + "</td><td>" + professor + "</td><td><form action=\"\" method=\"post\"><input class=\"removeClass\" type=\"submit\" name=\"remove\" value=\"remove\" id=\"submit_remove" + id + "\"><div class=\"submitContainer\"><label for=\"submit_remove" + id + "\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
 }
 
 function addEmergency(id, name, phonenumber) {
-	emerTableString += "<tr><td>" + name + "</td><td>" + phonenumber + "</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"emSubmit_remove" + id + "\"><div class=\"submitContainer\"><label for=\"emSubmit_remove" + id + "\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
+	emerTableString += "<tr><td>" + name + "</td><td>" + phonenumber + "</td><td><form action=\"\" method=\"post\"><input class=\"removeClass\" type=\"submit\" name=\"remove\" value=\"remove\" id=\"emSubmit_remove" + id + "\"><div class=\"submitContainer\"><label for=\"emSubmit_remove" + id + "\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
 }
 
 function checkLogin(json) {
@@ -141,11 +141,19 @@ function getTrans(json) {
 	var transP = JSON.parse(json);
 }
 
+function removeClass(classId){
+	console.log("remove me");
+}
+
 
 $(document).ready(function () {
 	loadContent(true);
 	setTimeout(function () {
 		getParams();
+		$('.removeClass').click(function(){
+			var id = $(this).id;
+			removeClass(id);
+		});
 	}, 50);
 	// getParams();
 
