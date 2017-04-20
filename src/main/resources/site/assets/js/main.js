@@ -29,8 +29,16 @@ function getCookie(cname) {
 }
 
 function needleString(needle, haystack){
-	var spot = haystack.indexOf(needle);
-	return haystack.substring((spot + needle.length), haystack.length);
+    var tempStack = haystack;
+    var spot = tempStack.indexOf(needle);
+    tempStack = tempStack.substring(spot, tempStack.length);
+    var and = tempStack.indexOf("&");
+    if (and == -1) {
+        return haystack.substring((spot + needle.length), haystack.length);
+    }else{
+        return tempStack.substring((spot + needle.length), and);
+    }
+	
 }
 
 /////////////////////////////////////////// end functions ///////////////////////////////////////////
