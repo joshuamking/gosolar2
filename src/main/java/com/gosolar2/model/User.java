@@ -13,10 +13,11 @@ public class User {
 	@Id @GeneratedValue (strategy = GenerationType.AUTO) private Long                   id;
 	private                                                      String                 firstName;
 	private                                                      String                 lastName;
+	@Column (unique = true)
 	private                                                      String                 email;
 	private                                                      String                 password;
 	private                                                      String                 phoneNumber;
-	@OneToMany (cascade = CascadeType.ALL, targetEntity = EmergencyContact.class, mappedBy = "user")
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = EmergencyContact.class, mappedBy = "user")
 	private                                                      List<EmergencyContact> emergencyContacts;
 
 	public Long getId () {

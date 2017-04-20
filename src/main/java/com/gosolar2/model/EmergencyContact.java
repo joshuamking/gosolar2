@@ -11,12 +11,12 @@ import javax.persistence.*;
 public class EmergencyContact {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private                               Long   id;
-	private                               String name;
-	private                               String address;
-	private                               String phoneNumber;
-	private                               String relationship;
-	@ManyToOne (optional = false) private User   user;
+	private                                                        Long   id;
+	private                                                        String name;
+	private                                                        String address;
+	private                                                        String phoneNumber;
+	private                                                        String relationship;
+	@ManyToOne (fetch = FetchType.EAGER, optional = false) private User   user;
 
 	public Long getId () {
 		return id;

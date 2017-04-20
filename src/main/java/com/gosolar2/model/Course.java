@@ -43,9 +43,9 @@ public class Course {
 	private                                                      String        days;
 	private                                                      int           crn;
 	private                                                      int           maxCapacity;
-	@ManyToOne (targetEntity = Professor.class)
+	@ManyToOne (fetch = FetchType.EAGER, targetEntity = Professor.class)
 	@JoinColumn (name = "professorId") private                   Professor     professor;
-	@ManyToMany (cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable (name = "student_courses",
 			joinColumns = {@JoinColumn (name = "course_id")},
 			inverseJoinColumns = {@JoinColumn (name = "student_id")})

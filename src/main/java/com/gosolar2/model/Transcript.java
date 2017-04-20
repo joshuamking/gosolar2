@@ -10,10 +10,10 @@ import javax.persistence.*;
 public class Transcript {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private                               Long    id;
-	private                               boolean isOfficial;
-	private                               boolean isGraduate;
-	@ManyToOne (optional = false) private Student student;
+	private                                                        Long    id;
+	private                                                        boolean isOfficial;
+	private                                                        boolean isGraduate;
+	@ManyToOne (fetch = FetchType.EAGER, optional = false) private Student student;
 
 	public Long getId () {
 		return id;

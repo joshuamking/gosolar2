@@ -28,18 +28,19 @@ public class LoginController {
 
 	@PostMapping ("/login")
 	@ResponseBody
-	public User login (@RequestBody HashMap map, HttpServletResponse response) throws IOException {
+	public Object login (@RequestBody HashMap map, HttpServletResponse response) throws IOException {
 		String email = (String) map.get("email");
 		String password = (String) map.get("password");
 
 		User user = userRepository.findByEmailAndPassword(email, password);
 
 		if (user == null) {
-			response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid Email/Password combination");
+			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+			return false;
 		}
 		else {
 			response.setStatus(HttpServletResponse.SC_OK);
+			return user;
 		}
-		return user;
 	}
 }

@@ -13,9 +13,9 @@ import java.util.List;
 public class Student extends User {
 	private String           major;
 	private boolean          isTA;
-	@ManyToMany (mappedBy = "students", cascade = CascadeType.ALL)
+	@ManyToMany (fetch = FetchType.EAGER, mappedBy = "students", cascade = CascadeType.ALL)
 	private List<Course>     courses;
-	@OneToMany (cascade = CascadeType.ALL, targetEntity = Transcript.class, mappedBy = "student")
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Transcript.class, mappedBy = "student")
 	private List<Transcript> transcripts;
 
 	public List<Transcript> getTranscripts () {

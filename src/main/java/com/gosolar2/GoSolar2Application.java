@@ -16,6 +16,7 @@
 
 package com.gosolar2;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,16 +25,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.init.ScriptUtils;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.sqlite.JDBC;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,8 +45,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,6 +59,7 @@ import java.util.List;
 @ComponentScan
 @EnableJpaRepositories
 @SpringBootApplication
+@EnableScheduling
 @ImportResource (value = "classpath:applicationContext.xml")
 public class GoSolar2Application {
 
@@ -76,18 +79,29 @@ public class GoSolar2Application {
 	@GetMapping ("/**")
 	@ResponseBody
 	public String home (HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String path = request.getServletPath();
 		try {
-			String path = request.getServletPath();
-			if (!path.contains(".")) { path += "/index.html"; }
+			if (!path.contains(".")) { path += "index.html"; }
 			// TODO: 4/8/17 Remove once we have a favicon.ico @solo
 			if (path.contains("favicon.ico")) { return null; }
-			File file = new File("src/main/resources/site/" + path);
-			return Files.readAllLines(file.toPath()).stream().map(s -> s + "\n").reduce(String::concat).get();
+
+			ClassLoader classLoader = getClass().getClassLoader();
+			return IOUtils.toString(classLoader.getResourceAsStream("site" + path));
 		}
-		catch (NoSuchFileException e) {
-			response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found!\n --------- \n" + e.getMessage());
+		catch (Exception e) {
+			response.sendError(HttpServletResponse.SC_NOT_FOUND, "File not found!\n --------- \n" + path);
 			return null;
 		}
+	}
+
+	@Bean
+	public WebMvcConfigurer corsConfigurer () {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings (CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*");
+			}
+		};
 	}
 
 	@Bean
@@ -108,8 +122,6 @@ public class GoSolar2Application {
 	public DataSource dataSource () {
 		return DataSourceBuilder.create()
 								.url("jdbc:sqlite:gosolar2.db")
-//								.username("root")
-//								.password("root")
 								.driverClassName(databaseDriver)
 								.build();
 	}
@@ -121,13 +133,18 @@ public class GoSolar2Application {
 		preparedStatementToGetCreateTableScripts.close();
 		new File("gosolar2.db").delete();
 
-		FileSystemResource resource = new FileSystemResource("gosolar2.sql");
+
+		ClassLoader classLoader = getClass().getClassLoader();
 
 		List<String> createScripts = new ArrayList<>();
 		ScriptUtils.splitSqlScript(dbCreateTableScript, ";", createScripts);
 		createScripts.forEach(this::executeSingleStatementOnDb);
 
-		ScriptUtils.executeSqlScript(dataSource().getConnection(), resource);
+		List<String> populateDatabaseStatementsList = new ArrayList<>();
+		String populateDatabaseStatements = IOUtils.toString(classLoader.getResourceAsStream("gosolar2.sql"));
+		ScriptUtils.splitSqlScript(populateDatabaseStatements, ";", populateDatabaseStatementsList);
+		populateDatabaseStatementsList.forEach(this::executeSingleStatementOnDb);
+
 		response.sendRedirect("");
 	}
 

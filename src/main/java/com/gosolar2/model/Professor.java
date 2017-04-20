@@ -18,7 +18,7 @@ public class Professor extends User {
 	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime   officeHoursStartTime;
 	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime   officeHoursEndTime;
 	private                                                      String      officeLocation;
-	@OneToMany (cascade = CascadeType.ALL, targetEntity = Course.class, mappedBy = "professor")
+	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Course.class, mappedBy = "professor")
 	private                                                      Set<Course> classes;
 
 	@JsonCreator (mode = JsonCreator.Mode.PROPERTIES)
