@@ -105,8 +105,8 @@ function validateLogin(email, pass){
 	    "content-type": "application/json"
 	  },
 	  "processData": false,
-	  "data": "{\n\t\"email\": \"pvenigandla2@student.gsu.edu\",\n\t\"password\": \"1234\"\n}"
-	  // "data": "{\n\t\"email\": \""+ unescape(email) +"\",\n\t\"password\": \""+ unescape(pass) +"\"\n}"
+	  // "data": "{\n\t\"email\": \"pvenigandla2@student.gsu.edu\",\n\t\"password\": \"1234\"\n}"
+	  "data": "{\n\t\"email\": \""+ unescape(email) +"\",\n\t\"password\": \""+ unescape(pass) +"\"\n}"
 	}
 	//   1234
 
