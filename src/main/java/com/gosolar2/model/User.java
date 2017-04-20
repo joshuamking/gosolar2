@@ -1,5 +1,7 @@
 package com.gosolar2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -56,6 +58,7 @@ public class User {
 		this.email = email;
 	}
 
+	@JsonIgnore
 	public String getPassword () {
 		return password;
 	}
