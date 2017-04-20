@@ -19,7 +19,7 @@ function onLoad (){
 	if (login){
 
 	}else{
-		
+
 	}
 }
 
@@ -33,12 +33,12 @@ function addEmergency(id, name, phonenumber){
 
 function checkLogin(json){
 	if (getCookie("loginStatus").toLowerCase() == "false") {
-		
-		
+
+
 	}else{
 
 	}
-	
+
 
 }
 
@@ -56,7 +56,7 @@ function getParams(){
 	var end = url.indexOf(endstr);
 	var json = url.substring((beg + begstr.length), end);
 	populate(json);
-	
+
 }
 
 function populate(json){
@@ -70,7 +70,7 @@ function populate(json){
 	if (jsonP.major) {
 		$(userDetails + '.major').html(jsonP.major.replace("+", " "));
 	}
-	
+
 
 	getCourses(jsonP.id);
 
@@ -95,23 +95,27 @@ function getCourses(id){
 		console.log(status);
 		if (status == 404) {
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
-			
+
 		}else if (result.length > 0) {
 			// console.log(result[0].name);
-			var professor = "";
 			for (var i = 0; i < result.length; i++) {
-				if (result[i].professor == null) {
-					addClass(result[i].id, result[i].name, "Some Day/Time", "Bhola");
-				}else{
-					addClass(result[i].id, result[i].name, "Some Day/Time", (result[i].professor.firstName + " " + result[i].professor.lastName));
-				}				
-			}	
-		}else{
+				var course = result[i];
+				var professor = "TBA";
+				var days = "TBA";
+				if (course.professor != null) {
+					professor = (course.professor.firstName + " " + course.professor.lastName);
+				}
+				if (course.days != null) {
+					days = course.days;
+				}
+				addClass(course.id, course.name, days, professor);
+			}
+		} else {
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
 		}
 		$('#tableData').html(tableString);
-		
-	  // console.log(tableString);
+
+		// console.log(tableString);
 	});
 }
 

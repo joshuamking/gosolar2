@@ -13,6 +13,6 @@ public class Utils {
 	}
 
 	public static boolean isNull (Object o) {
-		return isNull(o);
+		return o == null;
 	}
 }
