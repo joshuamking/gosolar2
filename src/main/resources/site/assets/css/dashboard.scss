@@ -166,6 +166,32 @@ body{
 						padding-bottom: 20px;
 					}
 					td{
+						.box{
+
+							//{ ** INCLUDES
+								@include notSelectable();
+								@include noDecoration();
+								@include quickTransition(all);
+								@include relativeMiddle();
+								cursor: pointer;
+							//} ** END INCLUDES
+
+
+							//{ ** ATTRIBUTES
+								height: 100%;
+								width: auto;
+								margin-left: 5px;
+								font-size: 0.8em;
+								padding: 5px;
+								color: white;
+								background-color: grey;
+							//} ** END ATTRIBUTES
+							
+							&:hover{
+								background-color: black;
+							}
+							
+						}
 						form{
 
 							//{ ** ATTRIBUTES
@@ -285,6 +311,32 @@ body{
 				
 				tr{
 
+					.box{
+
+						//{ ** INCLUDES
+							@include notSelectable();
+							@include noDecoration();
+							@include quickTransition(all);
+							@include relativeMiddle();
+							cursor: pointer;
+						//} ** END INCLUDES
+
+
+						//{ ** ATTRIBUTES
+							height: 100%;
+							width: auto;
+							margin-left: 5px;
+							font-size: 0.8em;
+							padding: 5px;
+							color: white;
+							background-color: grey;
+						//} ** END ATTRIBUTES
+						
+						&:hover{
+							background-color: black;
+						}
+						
+					}
 					//{ ** ATTRIBUTES
 						width: 100%;
 						padding-bottom: 20px;
