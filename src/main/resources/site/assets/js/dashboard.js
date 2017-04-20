@@ -15,40 +15,40 @@ var student_id = "";
 
 var jsonLoad = "";
 
-function onLoad (){
-	if (login){
+function onLoad() {
+	if (login) {
 
-	}else{
+	} else {
 
 	}
 }
 
-function addClass(id, classname, classday, professor){
-	tableString += "<tr><td>"+classname+"</td><td>"+classday+"</td><td>"+professor+"</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"submit_remove"+id+"\"><div class=\"submitContainer\"><label for=\"submit_remove"+id+"\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
+function addClass(id, classname, classday, professor) {
+	tableString += "<tr><td>" + classname + "</td><td>" + classday + "</td><td>" + professor + "</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"submit_remove" + id + "\"><div class=\"submitContainer\"><label for=\"submit_remove" + id + "\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
 }
 
-function addEmergency(id, name, phonenumber){
-	emerTableString += "<tr><td>"+name+"</td><td>"+phonenumber+"</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"emSubmit_remove"+id+"\"><div class=\"submitContainer\"><label for=\"emSubmit_remove"+id+"\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
+function addEmergency(id, name, phonenumber) {
+	emerTableString += "<tr><td>" + name + "</td><td>" + phonenumber + "</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"emSubmit_remove" + id + "\"><div class=\"submitContainer\"><label for=\"emSubmit_remove" + id + "\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
 }
 
-function checkLogin(json){
+function checkLogin(json) {
 	if (getCookie("loginStatus").toLowerCase() == "false") {
 
 
-	}else{
+	} else {
 
 	}
 
 
 }
 
-function loadContent(loggedin){
+function loadContent(loggedin) {
 	if (loggedin) {
 		$('#mainWrapper').load('includes/profile.html');
 	}
 }
 
-function getParams(){
+function getParams() {
 	var url = decodeURIComponent(window.location.href);
 	var begstr = "userData=";
 	var endstr = "&submit=Submit";
@@ -59,7 +59,7 @@ function getParams(){
 
 }
 
-function populate(json){
+function populate(json) {
 	jsonLoad = json;
 	var jsonP = JSON.parse(json);
 	// console.log(json.lastName);
@@ -78,13 +78,13 @@ function populate(json){
 
 }
 
-function getCourses(id){
+function getCourses(id) {
 	var settings = {
-	  "async": true,
-	  "crossDomain": true,
-	  "url": link + "student/" + id + "/getCourses",
-	  "method": "GET",
-	  "headers": {}
+		"async": true,
+		"crossDomain": true,
+		"url": link + "student/" + id + "/getCourses",
+		"method": "GET",
+		"headers": {}
 	}
 
 	$.ajax(settings).done(function (response, status) {
@@ -96,19 +96,23 @@ function getCourses(id){
 		if (status == 404) {
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
 
-		}else if (result.length > 0) {
+		} else if (result.length > 0) {
 			// console.log(result[0].name);
 			for (var i = 0; i < result.length; i++) {
 				var course = result[i];
 				var professor = "TBA";
 				var days = "TBA";
+				var time = "TBA";
 				if (course.professor != null) {
 					professor = (course.professor.firstName + " " + course.professor.lastName);
+				}
+				if (course.startTime != null && course.endTime != null) {
+					time = course.startTime.hour + ":" + course.startTime.minute + " - " + course.endTime.hour + ":" + course.endTime.minute;
 				}
 				if (course.days != null) {
 					days = course.days;
 				}
-				addClass(course.id, course.name, days, professor);
+				addClass(course.id, course.name, days + " / " + time, professor);
 			}
 		} else {
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
@@ -119,29 +123,28 @@ function getCourses(id){
 	});
 }
 
-function getEmer(json){
+function getEmer(json) {
 	var emerC = JSON.parse(json);
 	emerC = emerC.emergencyContacts;
 	if (emerC.length > 0) {
 		for (var i = 0; i < emerC.length; i++) {
 			addEmergency(emerC[i].id, emerC[i].name.replace("+", " "), emerC[i].phoneNumber);
 		}
-	}else{
+	} else {
 		emerTableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Contacts Yet</td></tr>";
 	}
 
 	$('#tableDataE').html(emerTableString);
 }
 
-function getTrans(json){
+function getTrans(json) {
 	var transP = JSON.parse(json);
 }
 
 
-
-$(document).ready(function(){
+$(document).ready(function () {
 	loadContent(true);
-	setTimeout(function(){
+	setTimeout(function () {
 		getParams();
 	}, 50);
 	// getParams();
