@@ -1,9 +1,11 @@
 package com.gosolar2.controller;
 
 import com.gosolar2.model.Course;
+import com.gosolar2.model.EmergencyContact;
 import com.gosolar2.model.Student;
 import com.gosolar2.model.Transcript;
 import com.gosolar2.repository.CourseRepository;
+import com.gosolar2.repository.EmergencyContactRepository;
 import com.gosolar2.repository.StudentRepository;
 import com.gosolar2.repository.TranscriptRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,17 +23,20 @@ import java.util.Set;
 @Controller
 @RequestMapping ("/student")
 public class StudentController {
-	private final StudentRepository    studentRepository;
-	private final CourseRepository     courseRepository;
-	private final TranscriptRepository transcriptRepository;
+	private final StudentRepository          studentRepository;
+	private final CourseRepository           courseRepository;
+	private final TranscriptRepository       transcriptRepository;
+	private final EmergencyContactRepository emergencyContactRepository;
 
 	@Autowired
 	public StudentController (@Qualifier ("studentRepository") StudentRepository studentRepository,
 							  @Qualifier ("courseRepository") CourseRepository courseRepository,
-							  @Qualifier ("transcriptRepository") TranscriptRepository transcriptRepository) {
+							  @Qualifier ("transcriptRepository") TranscriptRepository transcriptRepository,
+							  @Qualifier ("emergencyContactRepository") EmergencyContactRepository emergencyContactRepository) {
 		this.studentRepository = studentRepository;
 		this.courseRepository = courseRepository;
 		this.transcriptRepository = transcriptRepository;
+		this.emergencyContactRepository = emergencyContactRepository;
 	}
 
 	@GetMapping ("")
@@ -101,6 +106,17 @@ public class StudentController {
 			return null;
 		}
 	}
+
+	@PostMapping ("/{studentId}/newEmergencyContact")
+	@ResponseBody
+	public Student createNew (@RequestBody EmergencyContact emergencyContact, @PathVariable ("studentId") Long studentId) {
+		Student student = studentRepository.findOne(studentId);
+		emergencyContact.setUser(student);
+		emergencyContactRepository.save(emergencyContact);
+		student.getEmergencyContacts().add(emergencyContact);
+		return studentRepository.save(student);
+	}
+
 
 	@DeleteMapping ("/{studentId}")
 	@ResponseBody
