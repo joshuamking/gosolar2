@@ -23,10 +23,11 @@ function assignStrings(){
 				$('.submit').html(loginButton);
 				$('#submit').click(function(e){
 					e.preventDefault();
-					var formData = $("form").serialize();
+					var formData = $("form:not(#hiddenForm)").serialize();
 					var password = needleString("password=", formData);
 					var username = needleString("username=", formData);
-					// console.log(formData);
+					console.log(password);
+					console.log(username);
 					validateLogin(username, password);
 				});
 			}
@@ -99,8 +100,8 @@ function validateLogin(email, pass){
 	    "content-type": "application/json"
 	  },
 	  "processData": false,
-	  "data": "{\n\t\"email\": \"pvenigandla2@student.gsu.edu\",\n\t\"password\": \"1234\"\n}"
-	  // "data": "{\n\t\"email\": \""+ email +"\",\n\t\"password\": \""+ pass +"\"\n}"
+	  // "data": "{\n\t\"email\": \"pvenigandla2@student.gsu.edu\",\n\t\"password\": \"1234\"\n}"
+	  "data": "{\n\t\"email\": \""+ unescape(email) +"\",\n\t\"password\": \""+ unescape(pass) +"\"\n}"
 	}
 	//   1234
 

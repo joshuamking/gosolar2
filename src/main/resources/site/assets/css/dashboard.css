@@ -21,7 +21,28 @@ body {
     font-size: 2em;
     position: absolute;
     right: 40px;
-    top: 40px; }
+    top: 40px;
+    outline: none;
+    text-decoration: none;
+    color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    /* Chrome/Safari */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE10+ */
+    /* Rules below not implemented in browsers yet */
+    -o-user-select: none;
+    user-select: none;
+    cursor: default; }
+    #mainContainer .title:visted {
+      outline: none;
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent; }
+  #mainContainer #mainWrapper {
+    width: 100%; }
 
 .profile {
   padding: 20px;
@@ -63,6 +84,23 @@ body {
       clear: both;
       padding-bottom: 80px;
       font-size: 1.2em; }
+    .profile .profileTable .addClass {
+      position: relative;
+      float: right;
+      margin-top: 20px;
+      right: 40px;
+      border: solid 2px black;
+      padding: 10px;
+      background-color: black;
+      color: white;
+      -moz-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+      transition: all 0.2s ease; }
+      .profile .profileTable .addClass:hover {
+        background-color: white;
+        color: black; }
     .profile .profileTable table {
       width: 100%;
       clear: both;
@@ -117,6 +155,8 @@ body {
                   margin-left: 5px;
                   font-size: 0.8em;
                   padding: 0.2em;
+                  color: white;
+                  background-color: black;
                   -moz-transition: all 0.2s ease;
                   -o-transition: all 0.2s ease;
                   -webkit-transition: all 0.2s ease;
@@ -125,7 +165,7 @@ body {
                 .profile .profileTable table tbody tr td form .submitContainer label:nth-child(1) .box {
                   margin-left: 0px; }
                 .profile .profileTable table tbody tr td form .submitContainer label:hover .box {
-                  background-color: black;
-                  color: white; }
+                  background-color: white;
+                  color: black; }
 
 /*# sourceMappingURL=dashboard.css.map */

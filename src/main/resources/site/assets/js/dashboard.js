@@ -20,7 +20,7 @@ function onLoad (){
 }
 
 function addClass(id, classname, classday, professor){
-	tableString += "<tr><td>"+classname+"</td><td>"+classday+"</td><td>"+professor+"</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"submit_remove"+id+"\"><input type=\"submit\" name=\"modify\" value=\"modify\" id=\"submit_modify"+id+"\"><div class=\"submitContainer\"><label for=\"submit_remove"+id+"\"><div class=\"box\">Remove</div></label><label for=\"submit_modify"+id+"\"><div class=\"box\">Modify</div></label></div></form></td></tr>";
+	tableString += "<tr><td>"+classname+"</td><td>"+classday+"</td><td>"+professor+"</td><td><form action=\"\" method=\"post\"><input type=\"submit\" name=\"remove\" value=\"remove\" id=\"submit_remove"+id+"\"><div class=\"submitContainer\"><label for=\"submit_remove"+id+"\"><div class=\"box\">Remove</div></label></div></form></td></tr>";
 }
 
 function checkLogin(json){

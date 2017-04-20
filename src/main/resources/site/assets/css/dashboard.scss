@@ -26,6 +26,16 @@ body{
 		position: absolute;
 		right: 40px;
 		top: 40px;
+
+		//{ ** INCLUDES
+			@include noDecoration();
+			@include notSelectable();
+		//} ** END INCLUDES
+		
+	}
+
+	#mainWrapper{
+		width: 100%;
 	}
 }
 
@@ -95,6 +105,26 @@ body{
 			padding-bottom: 80px;
 			font-size: 1.2em;
 		}
+		.addClass{
+			position: relative;
+			float: right;
+			margin-top: 20px;
+			right: 40px;
+			border: solid 2px black;
+			padding: 10px;
+			background-color: black;
+			color: white;
+
+
+			//{ ** INCLUDES
+				@include quickTransition(all);
+			//} ** END INCLUDES
+			&:hover{
+				background-color: white;
+				color: black;
+
+			}
+		}
 		table{
 
 			//{ ** ATTRIBUTES
@@ -159,6 +189,8 @@ body{
 										margin-left: 5px;
 										font-size: 0.8em;
 										padding: 0.2em;
+										color: white;
+										background-color: black;
 
 
 										//{ ** INCLUDES
@@ -175,8 +207,8 @@ body{
 
 									&:hover{
 										.box{
-											background-color: black;
-											color: white;
+											background-color: white;
+											color: black;
 										}
 									}
 								}
