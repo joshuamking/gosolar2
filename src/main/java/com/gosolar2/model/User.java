@@ -1,9 +1,10 @@
 package com.gosolar2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gosolar2.enums.UserType;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Joshua King on 4/7/17.
@@ -12,15 +13,24 @@ import java.util.List;
 @Table (name = "user")
 @Inheritance (strategy = InheritanceType.JOINED)
 public class User {
-	@Id @GeneratedValue (strategy = GenerationType.AUTO) private Long                   id;
-	private                                                      String                 firstName;
-	private                                                      String                 lastName;
+	@Id @GeneratedValue (strategy = GenerationType.AUTO) private Long                  id;
+	private                                                      String                firstName;
+	private                                                      String                lastName;
 	@Column (unique = true)
-	private                                                      String                 email;
-	private                                                      String                 password;
-	private                                                      String                 phoneNumber;
+	private                                                      String                email;
+	private                                                      String                password;
+	private                                                      String                phoneNumber;
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = EmergencyContact.class, mappedBy = "user")
-	private                                                      List<EmergencyContact> emergencyContacts;
+	private                                                      Set<EmergencyContact> emergencyContacts;
+	private                                                      UserType              userType;
+
+	public UserType getUserType () {
+		return userType;
+	}
+
+	public void setUserType (UserType userType) {
+		this.userType = userType;
+	}
 
 	public Long getId () {
 		return id;
@@ -34,11 +44,11 @@ public class User {
 		this.firstName = firstName;
 	}
 
-	public List<EmergencyContact> getEmergencyContacts () {
+	public Set<EmergencyContact> getEmergencyContacts () {
 		return emergencyContacts;
 	}
 
-	public void setEmergencyContacts (List<EmergencyContact> emergencyContacts) {
+	public void setEmergencyContacts (Set<EmergencyContact> emergencyContacts) {
 		this.emergencyContacts = emergencyContacts;
 	}
 

@@ -1,6 +1,9 @@
 package com.gosolar2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * Created by pranathi on 4/7/17.
@@ -10,10 +13,26 @@ import javax.persistence.*;
 public class Transcript {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private                                                        Long    id;
-	private                                                        boolean isOfficial;
-	private                                                        boolean isGraduate;
-	@ManyToOne (fetch = FetchType.EAGER, optional = false) private Student student;
+	private                                                        Long      id;
+	private                                                        boolean   isOfficial;
+	private                                                        LocalDate dateRequested;
+	@ManyToOne (fetch = FetchType.EAGER, optional = false) private Student   student;
+
+	public Transcript (boolean isOfficial) {
+		this.isOfficial = isOfficial;
+		this.dateRequested = LocalDate.now();
+	}
+
+	public Transcript () {
+	}
+
+	public LocalDate getDateRequested () {
+		return dateRequested;
+	}
+
+	public void setDateRequested (LocalDate dateRequested) {
+		this.dateRequested = dateRequested;
+	}
 
 	public Long getId () {
 		return id;
@@ -27,14 +46,7 @@ public class Transcript {
 		this.isOfficial = isOfficial;
 	}
 
-	public boolean getIsGraduate () {
-		return isGraduate;
-	}
-
-	public void setIsGraduate (boolean isGraduate) {
-		this.isGraduate = isGraduate;
-	}
-
+	@JsonIgnore
 	public Student getStudent () {
 		return student;
 	}

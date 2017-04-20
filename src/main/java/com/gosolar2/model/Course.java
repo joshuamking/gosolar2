@@ -75,11 +75,6 @@ public class Course {
 		this.students = students;
 	}
 
-	public Long getProfessorId () {
-		return professor == null ? null : professor.getId();
-	}
-
-	@JsonIgnore
 	public Professor getProfessor () {
 		return professor;
 	}

@@ -1,5 +1,7 @@
 package com.gosolar2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -54,6 +56,7 @@ public class EmergencyContact {
 		this.relationship = relationship;
 	}
 
+	@JsonIgnore
 	public User getUser () {
 		return user;
 	}

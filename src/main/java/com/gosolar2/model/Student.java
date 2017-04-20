@@ -1,9 +1,10 @@
 package com.gosolar2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gosolar2.enums.UserType;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Joshua King on 4/7/17.
@@ -11,18 +12,22 @@ import java.util.List;
 @Entity
 @Table (name = "student")
 public class Student extends User {
-	private String           major;
-	private boolean          isTA;
+	private String          major;
+	private boolean         isTA;
 	@ManyToMany (fetch = FetchType.EAGER, mappedBy = "students", cascade = CascadeType.ALL)
-	private List<Course>     courses;
+	private Set<Course>     courses;
 	@OneToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL, targetEntity = Transcript.class, mappedBy = "student")
-	private List<Transcript> transcripts;
+	private Set<Transcript> transcripts;
 
-	public List<Transcript> getTranscripts () {
+	public Student () {
+		setUserType(UserType.Student);
+	}
+
+	public Set<Transcript> getTranscripts () {
 		return transcripts;
 	}
 
-	public void setTranscripts (List<Transcript> transcripts) {
+	public void setTranscripts (Set<Transcript> transcripts) {
 		this.transcripts = transcripts;
 	}
 
@@ -43,11 +48,11 @@ public class Student extends User {
 	}
 
 	@JsonIgnore
-	public List<Course> getCourses () {
+	public Set<Course> getCourses () {
 		return courses;
 	}
 
-	public void setCourses (List<Course> courses) {
+	public void setCourses (Set<Course> courses) {
 		this.courses = courses;
 	}
 }

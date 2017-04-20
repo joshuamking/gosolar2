@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gosolar2.converters.LocalTimeToIntConverter;
+import com.gosolar2.enums.UserType;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -23,11 +24,13 @@ public class Professor extends User {
 
 	@JsonCreator (mode = JsonCreator.Mode.PROPERTIES)
 	public Professor (@JsonProperty ("officeHoursStartTime") int officeHoursStartTime, @JsonProperty ("officeHoursEndTime") int officeHoursEndTime) {
+		this();
 		this.officeHoursStartTime = LocalTime.ofSecondOfDay(officeHoursStartTime);
 		this.officeHoursEndTime = LocalTime.ofSecondOfDay(officeHoursEndTime);
 	}
 
 	public Professor () {
+		setUserType(UserType.Professor);
 	}
 
 	@JsonIgnore
