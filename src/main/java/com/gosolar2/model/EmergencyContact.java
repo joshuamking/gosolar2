@@ -1,5 +1,7 @@
 package com.gosolar2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 /**
@@ -7,15 +9,16 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table (name = "course")
+@Table (name = "emergency_contact")
 public class EmergencyContact {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private Long   id;
-	private String name;
-	private String address;
-	private String phoneNumber;
-	private String relationship;
+	private                                                        Long   id;
+	private                                                        String name;
+	private                                                        String address;
+	private                                                        String phoneNumber;
+	private                                                        String relationship;
+	@ManyToOne (fetch = FetchType.EAGER, optional = false) private User   user;
 
 	public Long getId () {
 		return id;
@@ -51,5 +54,14 @@ public class EmergencyContact {
 
 	public void setRelationship (String relationship) {
 		this.relationship = relationship;
+	}
+
+	@JsonIgnore
+	public User getUser () {
+		return user;
+	}
+
+	public void setUser (User user) {
+		this.user = user;
 	}
 }

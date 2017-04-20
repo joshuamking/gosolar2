@@ -8,11 +8,8 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <!--destroy-method="close"-->
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/gosolar2"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
-        <!--<property name="connectionCachingEnabled" value="true"/>-->
+        <property name="driverClassName" value="org.sqlite.JDBC"/>
+        <property name="url" value="jdbc:sqlite:gosolar2.db"/>
     </bean>
 
 
@@ -22,7 +19,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">create</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.dialect">com.enigmabridge.hibernate.dialect.SQLiteDialect</prop>
             </props>
         </property>
     </bean>
@@ -30,7 +27,7 @@
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="showSql" value="true"/>
         <property name="generateDdl" value="true"/>
-        <property name="database" value="MYSQL"/>
+        <!--<property name="database" value="MYSQL"/>-->
     </bean>
 
     <!-- Enables the Hibernate @Transactional programming model -->

@@ -18,6 +18,7 @@ import com.gosolar2.converters.LocalTimeToIntConverter;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  * Created by Joshua King on 4/7/17.
@@ -27,23 +28,28 @@ import java.time.LocalTime;
 public class Course {
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO)
-	private                                                      Long      id;
-	private                                                      String    name;
-	private                                                      int       credits;
-	private                                                      String    classNumber;
-	private                                                      String    description;
-	private                                                      String    degreeLevel;
-	private                                                      String    subjectCode;
-	private                                                      String    building;
-	private                                                      String    roomNumber;
-	private                                                      String    term;
-	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime startTime;
-	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime endTime;
-	private                                                      String    days;
-	private                                                      int       crn;
-	private                                                      int       maxCapacity;
-	@ManyToOne (targetEntity = Professor.class)
-	@JoinColumn (name = "professorId") private                   Professor professor;
+	private                                                      Long          id;
+	private                                                      String        name;
+	private                                                      int           credits;
+	private                                                      String        classNumber;
+	private                                                      String        description;
+	private                                                      String        degreeLevel;
+	private                                                      String        subjectCode;
+	private                                                      String        building;
+	private                                                      String        roomNumber;
+	private                                                      String        term;
+	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime     startTime;
+	@Convert (converter = LocalTimeToIntConverter.class) private LocalTime     endTime;
+	private                                                      String        days;
+	private                                                      int           crn;
+	private                                                      int           maxCapacity;
+	@ManyToOne (fetch = FetchType.EAGER, targetEntity = Professor.class)
+	@JoinColumn (name = "professorId") private                   Professor     professor;
+	@ManyToMany (fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable (name = "student_courses",
+			joinColumns = {@JoinColumn (name = "course_id")},
+			inverseJoinColumns = {@JoinColumn (name = "student_id")})
+	private                                                      List<Student> students;
 
 	public Course (String name, int credits, String subjectCode, String classNumber, String description, String degreeLevel, String term, int crn, int maxCapacity) {
 		this.name = name;
@@ -60,11 +66,15 @@ public class Course {
 	public Course () {
 	}
 
-	public Long getProfessorId () {
-		return professor == null ? null : professor.getId();
+	@JsonIgnore
+	public List<Student> getStudents () {
+		return students;
 	}
 
-	@JsonIgnore
+	public void setStudents (List<Student> students) {
+		this.students = students;
+	}
+
 	public Professor getProfessor () {
 		return professor;
 	}
