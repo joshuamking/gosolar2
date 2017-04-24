@@ -35,8 +35,7 @@ public class LoginController {
 		User user = userRepository.findByEmailAndPassword(email, password);
 
 		if (user == null) {
-			response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-			return false;
+			return null;
 		}
 		else {
 			response.setStatus(HttpServletResponse.SC_OK);

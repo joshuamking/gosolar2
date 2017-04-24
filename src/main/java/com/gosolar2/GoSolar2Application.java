@@ -17,6 +17,7 @@
 package com.gosolar2;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -63,7 +64,8 @@ import java.util.List;
 @ImportResource (value = "classpath:applicationContext.xml")
 public class GoSolar2Application {
 
-	private String databaseDriver = JDBC.class.getName();
+	final static Logger logger         = Logger.getLogger(GoSolar2Application.class);
+	private      String databaseDriver = JDBC.class.getName();
 
 	public static void main (String[] args) throws Exception {
 		SpringApplication.run(GoSolar2Application.class, args);
@@ -128,6 +130,8 @@ public class GoSolar2Application {
 
 	@GetMapping ("/resetServerData")
 	public void resetServerData (HttpServletResponse response) throws Exception {
+		logger.debug("Resetting server data to default data.");
+
 		PreparedStatement preparedStatementToGetCreateTableScripts = dataSource().getConnection().prepareStatement("SELECT group_concat(sql,';') FROM sqlite_master;");
 		String dbCreateTableScript = preparedStatementToGetCreateTableScripts.executeQuery().getString(1);
 		preparedStatementToGetCreateTableScripts.close();
