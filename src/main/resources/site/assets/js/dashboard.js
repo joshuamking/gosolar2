@@ -2,6 +2,7 @@
 // var link = "http://8000e316.ngrok.io/";
 // http://8000e316.ngrok.io/resetServerData
 var link = "http://localhost:8000/";
+
 /////////////////////////////////////////// end link ///////////////////////////////////////////
 
 var tableHeader = "<tr><th>Class Name</th><th>Day/Time</th><th>Instructor</th><th>Options</th></tr>";
