@@ -80,19 +80,23 @@ public class StudentController {
 			return student;
 		}
 		catch (NullPointerException e) {
-			response.sendError(404, e.getMessage());
 			return null;
 		}
 	}
 
 	@GetMapping ("/{studentId}/unregisterForCourse/{courseId}")
 	@ResponseBody
-	public Student unregisterForCourse (@PathVariable ("studentId") Long studentId, @PathVariable ("courseId") Long courseId) {
-		Student student = studentRepository.findOne(studentId);
-		Course course = courseRepository.findOne(courseId);
-		course.getStudents().remove(student);
-		courseRepository.save(course);
-		return student;
+	public Student unregisterForCourse (@PathVariable ("studentId") Long studentId, @PathVariable ("courseId") Long courseId, HttpServletResponse response) throws IOException {
+		try {
+			Student student = studentRepository.findOne(studentId);
+			Course course = courseRepository.findOne(courseId);
+			course.getStudents().remove(student);
+			courseRepository.save(course);
+			return student;
+		}
+		catch (NullPointerException e) {
+			return null;
+		}
 	}
 
 	@GetMapping ("/{studentId}/getCourses")
@@ -102,19 +106,35 @@ public class StudentController {
 			return studentRepository.findOne(studentId).getCourses();
 		}
 		catch (NullPointerException e) {
-			response.sendError(404, e.getMessage());
 			return null;
 		}
 	}
 
 	@PostMapping ("/{studentId}/newEmergencyContact")
 	@ResponseBody
-	public Student createNew (@RequestBody EmergencyContact emergencyContact, @PathVariable ("studentId") Long studentId) {
+	public Student createNewEmergencyContact (@RequestBody EmergencyContact emergencyContact, @PathVariable ("studentId") Long studentId) {
 		Student student = studentRepository.findOne(studentId);
 		emergencyContact.setUser(student);
 		emergencyContactRepository.save(emergencyContact);
 		student.getEmergencyContacts().add(emergencyContact);
 		return studentRepository.save(student);
+	}
+
+	@GetMapping ("/{studentId}/removeEmergencyContact/{emergencyContactId}")
+	@ResponseBody
+	public Student removeEmergencyContact (@PathVariable ("studentId") Long studentId, @PathVariable ("emergencyContactId") Long emergencyContactId) {
+		try {
+			EmergencyContact emergencyContact = emergencyContactRepository.findOne(emergencyContactId);
+			Student student = studentRepository.findOne(studentId);
+			Set<EmergencyContact> emergencyContacts = student.getEmergencyContacts();
+			emergencyContacts.remove(emergencyContact);
+			emergencyContactRepository.delete(emergencyContact);
+			student.setEmergencyContacts(emergencyContacts);
+			return studentRepository.save(student);
+		}
+		catch (NullPointerException e) {
+			return null;
+		}
 	}
 
 
