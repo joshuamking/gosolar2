@@ -1,7 +1,7 @@
 /////////////////////////////////////////// link ///////////////////////////////////////////
-var link = "http://1b2f08a3.ngrok.io/";
-// http://1b2f08a3.ngrok.io/resetServerData
-// var link = "http://localhost:8000/";
+// var link = "http://8000e316.ngrok.io/";
+// http://8000e316.ngrok.io/resetServerData
+var link = "http://localhost:8000/";
 /////////////////////////////////////////// end link ///////////////////////////////////////////
 
 var tableHeader = "<tr><th>Class Name</th><th>Day/Time</th><th>Instructor</th><th>Options</th></tr>";
@@ -213,6 +213,10 @@ function removeContact(classId){
 	});
 }
 
+function addClassBuilder(id, cname, time, day, description){
+
+}
+
 function addClickHandler(type){
 	$('.addContainer').css('display', 'block');
 	setTimeout(function(){
@@ -233,8 +237,11 @@ function addClickHandler(type){
 			}
 
 			$.ajax(settings).done(function (response) {
-				$('.addContainer>.content').html(JSON.stringify(response));
-				console.log(response);
+				// $('.addContainer>.content').html(JSON.stringify(response));
+				// console.log(response);
+				var json = JSON.stringify(response);
+				json = JSON.parse(json);
+				$('.addContainer>.content').load('includes/addClassMock.html');
 			});
 			break;
 		case 'contact':
