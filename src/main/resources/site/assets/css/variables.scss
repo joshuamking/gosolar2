@@ -136,6 +136,27 @@ $color-red: #700a0a;
     transform: translateX(-50%);
 }
 
+@mixin relativeCenter(){
+    position: relative;
+    float: left;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin absoluteMiddle(){
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@mixin absoluteCenter(){
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 @mixin card(){
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     -webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);

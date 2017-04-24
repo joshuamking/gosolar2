@@ -111,8 +111,8 @@ function validateLogin(email, pass){
 	//   1234
 
 	$.ajax(settings).done(function (response, status) {
-		console.log(response);
-		console.log(status);
+		// console.log(response);
+		// console.log(status);
 		// console.log(JSON.stringify(response));
 		if (response) {
 			// console.log("response returned");

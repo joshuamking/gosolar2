@@ -41,7 +41,69 @@ body {
       color: inherit;
       -webkit-tap-highlight-color: transparent; }
   #mainContainer #mainWrapper {
-    width: 100%; }
+    width: 100%;
+    z-index: 2; }
+  #mainContainer .addContainer {
+    position: fixed;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 3;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    opacity: 0;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease; }
+    #mainContainer .addContainer .content {
+      min-width: 300px;
+      min-height: 300px;
+      background-color: white;
+      border: 5px solid black;
+      width: 70%;
+      height: 60%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%); }
+    #mainContainer .addContainer .cancel {
+      border: 2px solid white;
+      position: absolute;
+      bottom: 20vh;
+      left: 50%;
+      transform: translate(-50%, 16vh);
+      padding: 10px 20px;
+      -moz-transition: all 0.2s ease;
+      -o-transition: all 0.2s ease;
+      -webkit-transition: all 0.2s ease;
+      -ms-transition: all 0.2s ease;
+      transition: all 0.2s ease;
+      -webkit-user-select: none;
+      /* Chrome/Safari */
+      -moz-user-select: none;
+      /* Firefox */
+      -ms-user-select: none;
+      /* IE10+ */
+      /* Rules below not implemented in browsers yet */
+      -o-user-select: none;
+      user-select: none;
+      cursor: default;
+      outline: none;
+      text-decoration: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+      color: white; }
+      #mainContainer .addContainer .cancel:visted {
+        outline: none;
+        text-decoration: none;
+        color: inherit;
+        -webkit-tap-highlight-color: transparent; }
+      #mainContainer .addContainer .cancel:hover {
+        background-color: white;
+        color: black; }
 
 .profile {
   padding: 20px;

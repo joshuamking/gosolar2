@@ -214,14 +214,36 @@ function removeContact(classId){
 }
 
 function addClickHandler(type){
+	$('.addContainer').css('display', 'block');
+	setTimeout(function(){
+		$('.addContainer').animate({
+			opacity: 1
+		}, 200);
+	}, 50);
 	switch (type){
 		case 'class':
-			
+			// console.log('class');
+			$('.addContainer>.cancel').html("Done");
+			var settings = {
+				"async": true,
+				"crossDomain": true,
+				"url": link + "course/",
+				"method": "GET",
+				"headers": {}
+			}
+
+			$.ajax(settings).done(function (response) {
+				$('.addContainer>.content').html(JSON.stringify(response));
+				console.log(response);
+			});
 			break;
 		case 'contact':
-
+			// console.log('contact');
+			$('.addContainer>.cancel').html("Cancel");
+			$('.addContainer>.content').load('includes/addContactForm.html');
 			break;
 		default:
+			$('.addContainer>.cancel').html("Done");
 			break;
 	}
 }
@@ -230,5 +252,14 @@ $(document).ready(function () {
 	loadContent(true);
 	setTimeout(function () {
 		getParams();
+
 	}, 50);
+	$('.cancel').click(function(){
+		$('.addContainer').animate({
+			opacity: 0
+		}, 200);
+		setTimeout(function(){
+			$('.addContainer').css('display', 'none');
+		}, 400);
+	});
 });

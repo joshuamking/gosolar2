@@ -40,8 +40,69 @@ body{
 
 	#mainWrapper{
 		width: 100%;
+		z-index: 2;
+	}
+	.addContainer{
+
+		//{ ** ATTRIBUTES
+			position: fixed;
+			top: 0;
+			background-color: rgba(0,0,0,0.9);
+			z-index: 3;
+			width: 100%;
+			height: 100vh;
+			display: none;
+			opacity: 0;
+		//} ** END ATTRIBUTES
+
+		//{ ** INCLUDES
+			@include quickTransition(all);
+		//} ** END INCLUDES
+		
+		
+		.content{
+			min-width: 300px;
+			min-height: 300px;
+			background-color: white;
+			border: 5px solid black;
+			width: 70%;
+			height: 60%;
+
+
+			//{ ** INCLUDES
+				@include absoluteCenter();
+			//} ** END INCLUDES
+			
+		}
+
+		.cancel{
+			border: 2px solid white;
+		   
+		    position: absolute;
+		    bottom: 20vh;
+		    left: 50%;
+		    transform: translate(-50%, 16vh);
+		    padding: 10px 20px;
+
+
+		    //{ ** INCLUDES
+		    	@include quickTransition(all);
+		    	@include notSelectable();
+		    	@include noDecoration();
+		    	cursor: pointer;
+		    	color: white;
+		    //} ** END INCLUDES
+		    
+		    &:hover{
+		    	background-color: white;
+		    	color: black;
+
+		    }
+		}
 	}
 }
+
+
 
 .profile{
 
