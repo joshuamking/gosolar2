@@ -35,12 +35,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.sqlite.JDBC;
 
+import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
@@ -104,6 +106,31 @@ public class GoSolar2Application {
 				registry.addMapping("/**").allowedOrigins("*");
 			}
 		};
+	}
+
+	@Bean
+	public CommonsRequestLoggingFilter requestLoggingFilter () {
+		CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+		loggingFilter.setIncludeClientInfo(false);
+		loggingFilter.setIncludeQueryString(true);
+		loggingFilter.setIncludePayload(false);
+		return loggingFilter;
+	}
+
+	@Bean
+	public Filter logFilter () {
+		CommonsRequestLoggingFilter filter = new CommonsRequestLoggingFilter() {
+			@Override protected boolean shouldLog (HttpServletRequest request) {
+				return !request.getServletPath().matches(".*(\\.js|\\.html|\\.css|\\.png|\\.ico)");
+			}
+
+			@Override protected void beforeRequest (HttpServletRequest request, String message) {
+			}
+		};
+		filter.setIncludeQueryString(true);
+		filter.setIncludePayload(false);
+		filter.setIncludeClientInfo(false);
+		return filter;
 	}
 
 	@Bean

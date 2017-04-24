@@ -42,7 +42,7 @@ public class ReportsCronJobs {
 
 
 	@Scheduled (cron = "0 1 1 ? * SUN")
-	@Scheduled (fixedDelay = 10000, initialDelay = 0)
+	@Scheduled (fixedDelay = 24 * 60 * 1000, initialDelay = 0)
 	public void weeklyReports () throws IOException {
 		logger.info("Starting weeklyReports");
 

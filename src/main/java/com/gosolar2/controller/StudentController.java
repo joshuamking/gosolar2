@@ -95,7 +95,6 @@ public class StudentController {
 			return student;
 		}
 		catch (NullPointerException e) {
-//			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			return null;
 		}
 	}
@@ -121,16 +120,21 @@ public class StudentController {
 		return studentRepository.save(student);
 	}
 
-	@DeleteMapping ("/{studentId}/removeEmergencyContact/{emergencyContactId}")
+	@GetMapping ("/{studentId}/removeEmergencyContact/{emergencyContactId}")
 	@ResponseBody
 	public Student removeEmergencyContact (@PathVariable ("studentId") Long studentId, @PathVariable ("emergencyContactId") Long emergencyContactId) {
-		EmergencyContact emergencyContact = emergencyContactRepository.findOne(emergencyContactId);
-		Student student = studentRepository.findOne(studentId);
-		Set<EmergencyContact> emergencyContacts = student.getEmergencyContacts();
-		emergencyContacts.remove(emergencyContact);
-		emergencyContactRepository.delete(emergencyContact);
-		student.setEmergencyContacts(emergencyContacts);
-		return studentRepository.save(student);
+		try {
+			EmergencyContact emergencyContact = emergencyContactRepository.findOne(emergencyContactId);
+			Student student = studentRepository.findOne(studentId);
+			Set<EmergencyContact> emergencyContacts = student.getEmergencyContacts();
+			emergencyContacts.remove(emergencyContact);
+			emergencyContactRepository.delete(emergencyContact);
+			student.setEmergencyContacts(emergencyContacts);
+			return studentRepository.save(student);
+		}
+		catch (NullPointerException e) {
+			return null;
+		}
 	}
 
 
