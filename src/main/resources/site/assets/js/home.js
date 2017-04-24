@@ -1,6 +1,6 @@
 /////////////////////////////////////////// link ///////////////////////////////////////////
-// var link = "https://1644cae1.ngrok.io/";
-var link = "http://localhost:8000/";
+var link = "http://1b2f08a3.ngrok.io/";
+// var link = "http://localhost:8000/";
 /////////////////////////////////////////// end link ///////////////////////////////////////////
 
 var state = 0;
@@ -111,13 +111,14 @@ function validateLogin(email, pass){
 	//   1234
 
 	$.ajax(settings).done(function (response, status) {
-		// console.log(response);
-		// console.log(status);
+		console.log(response);
+		console.log(status);
 		// console.log(JSON.stringify(response));
-		if (status != 403) {
+		if (response) {
 			// console.log("response returned");
 			loginAllower(JSON.stringify(response));
 		}else{
+
 			// console.log("false returned");
 			loginAllower(false);
 		}

@@ -1,6 +1,7 @@
 /////////////////////////////////////////// link ///////////////////////////////////////////
-// var link = "https://1644cae1.ngrok.io/";
-var link = "http://localhost:8000/";
+var link = "http://1b2f08a3.ngrok.io/";
+// http://1b2f08a3.ngrok.io/resetServerData
+// var link = "http://localhost:8000/";
 /////////////////////////////////////////// end link ///////////////////////////////////////////
 
 var tableHeader = "<tr><th>Class Name</th><th>Day/Time</th><th>Instructor</th><th>Options</th></tr>";
@@ -92,8 +93,8 @@ function getCourses(id) {
 		result = JSON.parse(result);
 		// console.log("result length is " + result.length);
 		// 
-		console.log(status);
-		if (status == 404) {
+		// console.log(status);
+		if (status == null) {
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
 
 		} else if (result.length > 0) {
@@ -118,9 +119,13 @@ function getCourses(id) {
 			tableString = "<tr style=\"width: 100%\"><td style=\"width: 100%\" colspan=\"0\">No Classes Yet</td></tr>";
 		}
 		$('#tableData').html(tableString);
+		assignClassRemoval();
 
 		// console.log(tableString);
 	});
+
+
+
 }
 
 function getEmer(json) {
@@ -135,67 +140,95 @@ function getEmer(json) {
 	}
 
 	$('#tableDataE').html(emerTableString);
+	assignEmerRemoval();
 }
 
 function getTrans(json) {
 	var transP = JSON.parse(json);
 }
 
+function assignClassRemoval(){
+	$('.removeClass').click(function(){
+		removeClass(this.id);	
+	});
+}
+
+function assignEmerRemoval(){
+	$('.emRemoveClass').click(function(){
+		removeContact(this.id);
+	});
+}
+
+function getEmerStudent(id){
+	var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": link + "student/" + id,
+	"method": "GET",
+	"headers": {}
+	}
+
+	$.ajax(settings).done(function (response) {
+		jsonLoad = response;
+		getEmer(JSON.stringify(response));
+	});
+}
+
 function removeClass(classId) {
-	console.log("remove me");
+	// console.log('the id is ' + classId);
+	var str = "submit_remove";
+	classId = classId.substring((classId.indexOf(str) + str.length), classId.length);
+	// console.log(classId);
+	var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": link + "student/" + student_id + "/unregisterForCourse/" + classId,
+	"method": "GET",
+	"headers": {}
+	}
+
+	$.ajax(settings).done(function (response, status) {
+		// console.log(response);
+		tableString = tableHeader;
+		getCourses(student_id);
+	});
+}
+
+function removeContact(classId){
+	var str = "emSubmit_remove";
+	classId = classId.substring((classId.indexOf(str) + str.length), classId.length);
+	var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": link + "student/" + student_id + "/removeEmergencyContact/" + classId,
+	"method": "GET",
+	"headers": {}
+	}
+
+	$.ajax(settings).done(function (response, status) {
+		// console.log(response);
+		emerTableString = emerTableHeader;
+		getEmerStudent(student_id);
+		
+	});
+}
+
+function addClickHandler(type){
+	switch (type){
+		case 'class':
+			
+			break;
+		case 'contact':
+
+			break;
+		default:
+			break;
+	}
 }
 
 $(document).ready(function () {
 	loadContent(true);
 	setTimeout(function () {
 		getParams();
-		$('.removeClass').click(function () {
-			var id = $(this).id;
-			removeClass(id);
-		});
-		$("#addContactDialog").dialog({
-			autoOpen: false,
-			show: {
-				effect: "blind",
-				duration: 1000
-			},
-			hide: {
-				effect: "explode",
-				duration: 1000
-			}
-		});
-		$(".addContact").on("click", function () {
-			$("#addContactDialog").dialog("open");
-		})
-		$("#addContactDialogSubmitButton").on("click", function () {
-			var settings = {
-				"async": true,
-				"crossDomain": true,
-				"url": link + "/student/" + student_id + "/newEmergencyContact",
-				"method": "POST",
-				"headers": {
-					"content-type": "application/json"
-				},
-				"processData": false,
-				"data": {
-					"name": $("#addContactDialogName").val(),
-					"address": "",
-					"phoneNumber": $("#addContactDialogPhone").val(),
-					"relationship": ""
-				}
-			}
-
-			$.ajax(settings).done(function (response) {
-				console.log(response);
-			});
-		})
 	}, 50);
-	$('.removeClass').click(function(){
-		console.log("remove me");
-		var id = $(this).id;
-		removeClass(id);
-	});
-	// getParams();
-
-
 });
