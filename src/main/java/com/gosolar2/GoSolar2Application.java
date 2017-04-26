@@ -73,7 +73,7 @@ public class GoSolar2Application {
 		SpringApplication.run(GoSolar2Application.class, args);
 
 		try {
-			Runtime.getRuntime().exec("open http://localhost:8000/");
+			Runtime.getRuntime().exec("open http://localhost:8000/resetServerData");
 		}
 		catch (IOException e) {
 			e.printStackTrace();
